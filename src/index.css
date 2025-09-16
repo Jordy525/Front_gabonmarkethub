@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design system E-commerce B2B Gabon
+Palette: Vert Gabon #008751, Jaune Soleil #FFD500, Bleu Océan #005293, Gris Anthracite #333333
+*/
+
+@layer base {
+  :root {
+    /* Variables de base pour compatibilité */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 151 100% 26%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  body {
+    @apply bg-white text-gray-900;
+  }
+}
+
+/* Animations personnalisées */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceSoft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+  
+  .animate-fade-in-delay-1 {
+    animation: fadeIn 0.5s ease-in-out 0.1s forwards;
+  }
+  
+  .animate-fade-in-delay-2 {
+    animation: fadeIn 0.5s ease-in-out 0.2s forwards;
+  }
+  
+  .animate-fade-in-delay-3 {
+    animation: fadeIn 0.5s ease-in-out 0.3s forwards;
+  }
+}
