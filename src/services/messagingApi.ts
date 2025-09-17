@@ -3,12 +3,18 @@
 import type { Conversation, Message, ApiResponse } from '@/types/messaging';
 
 class MessagingApi {
-  private baseUrl = '/api';
+  private baseUrl = import.meta.env.VITE_API_URL || '/api';
   
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const token = localStorage.getItem('authToken');
+    const fullUrl = `${this.baseUrl}${endpoint}`;
     
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+    console.log('🔍 MessagingApi - baseUrl:', this.baseUrl);
+    console.log('🔍 MessagingApi - endpoint:', endpoint);
+    console.log('🔍 MessagingApi - fullUrl:', fullUrl);
+    console.log('🔍 MessagingApi - VITE_API_URL:', import.meta.env.VITE_API_URL);
+    
+    const response = await fetch(fullUrl, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -16,6 +22,9 @@ class MessagingApi {
       },
       ...options,
     });
+
+    console.log('🔍 MessagingApi - Status:', response.status);
+    console.log('🔍 MessagingApi - Headers:', Object.fromEntries(response.headers.entries()));
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
