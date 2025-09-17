@@ -9,6 +9,14 @@ export const ServerStatus: React.FC = () => {
   const [isOnline, setIsOnline] = useState(true);
   const [serverStatus, setServerStatus] = useState<'online' | 'offline' | 'checking'>('checking');
   const [lastError, setLastError] = useState<string | null>(null);
+  const [isProduction, setIsProduction] = useState(false);
+  const [failureCount, setFailureCount] = useState(0);
+
+  // Détecter l'environnement de production
+  useEffect(() => {
+    const isProd = import.meta.env.PROD || window.location.hostname !== 'localhost';
+    setIsProduction(isProd);
+  }, []);
 
   // Vérifier le statut du serveur
   const checkServerStatus = async () => {
@@ -20,8 +28,20 @@ export const ServerStatus: React.FC = () => {
       await apiClient.get('/health');
       
       setServerStatus('online');
+      setFailureCount(0); // Reset du compteur d'échecs en cas de succès
     } catch (error) {
       console.warn('Serveur non accessible:', error);
+      
+      // Incrémenter le compteur d'échecs
+      const newFailureCount = failureCount + 1;
+      setFailureCount(newFailureCount);
+      
+      // En production, attendre 3 échecs avant de marquer comme offline
+      if (isProduction && newFailureCount < 3) {
+        setServerStatus('checking');
+        return;
+      }
+      
       setServerStatus('offline');
       
       // Capturer le message d'erreur pour l'affichage
@@ -43,17 +63,31 @@ export const ServerStatus: React.FC = () => {
 
     // Vérification initiale
     setIsOnline(navigator.onLine);
-    checkServerStatus();
-
-    // Vérification périodique du serveur
-    const interval = setInterval(checkServerStatus, 30000); // Toutes les 30 secondes
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-      clearInterval(interval);
-    };
-  }, []);
+    
+    // En production, vérifier le serveur moins fréquemment et avec plus de tolérance
+    if (isProduction) {
+      // Vérification initiale avec un délai
+      setTimeout(checkServerStatus, 2000);
+      // Vérification périodique moins fréquente en production (toutes les 2 minutes)
+      const interval = setInterval(checkServerStatus, 120000);
+      
+      return () => {
+        window.removeEventListener('online', handleOnline);
+        window.removeEventListener('offline', handleOffline);
+        clearInterval(interval);
+      };
+    } else {
+      // En développement, comportement normal
+      checkServerStatus();
+      const interval = setInterval(checkServerStatus, 30000); // Toutes les 30 secondes
+      
+      return () => {
+        window.removeEventListener('online', handleOnline);
+        window.removeEventListener('offline', handleOffline);
+        clearInterval(interval);
+      };
+    }
+  }, [isProduction]);
 
   // Ne rien afficher si tout va bien
   if (isOnline && serverStatus === 'online') {
@@ -79,15 +113,31 @@ export const ServerStatus: React.FC = () => {
           <AlertDescription>
             <strong>Serveur backend inaccessible</strong>
             <br />
-            Vérifiez que le serveur backend est démarré sur le port 3001.
-            {lastError && (
-              <span className="text-sm block mt-1">
-                Erreur: {lastError}
-              </span>
+            {isProduction ? (
+              <>
+                Le service est temporairement indisponible. Veuillez réessayer dans quelques instants.
+                {lastError && (
+                  <span className="text-sm block mt-1">
+                    Erreur: {lastError}
+                  </span>
+                )}
+                <div className="text-xs mt-2 text-red-700">
+                  💡 Si le problème persiste, contactez l'administrateur du système.
+                </div>
+              </>
+            ) : (
+              <>
+                Vérifiez que le serveur backend est démarré sur le port 3001.
+                {lastError && (
+                  <span className="text-sm block mt-1">
+                    Erreur: {lastError}
+                  </span>
+                )}
+                <div className="text-xs mt-2 text-red-700">
+                  💡 Solution: Démarrez le serveur avec <code>npm run dev</code> dans le dossier Backend_Ecommerce
+                </div>
+              </>
             )}
-            <div className="text-xs mt-2 text-red-700">
-              💡 Solution: Démarrez le serveur avec <code>npm run dev</code> dans le dossier Backend_Ecommerce
-            </div>
           </AlertDescription>
         </Alert>
       )}
