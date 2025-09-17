@@ -26,6 +26,7 @@ interface Message {
   sender_name: string;
   sender_id: number;
   sender_role_id: number;
+  sender_photo: string | null;
   parent_content: string | null;
   parent_sender_name: string | null;
   attachments: Array<{
