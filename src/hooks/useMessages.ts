@@ -41,6 +41,7 @@ export const useMessages = (conversationId: number | null) => {
       setError(null);
       
       console.log('🔄 Chargement messages conversation:', conversationId);
+      console.log('🔍 useMessages - VITE_API_URL:', import.meta.env.VITE_API_URL);
       const messagesData = await messagingApi.getMessages(conversationId);
       console.log('✅ Messages chargés:', messagesData.length);
       setMessages(messagesData);
