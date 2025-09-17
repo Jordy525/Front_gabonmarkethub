@@ -120,12 +120,22 @@ export const MessageThread: React.FC<MessageThreadProps> = ({
         throw new Error('Token d\'authentification manquant');
       }
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/messages/conversations/${conversationId}/messages`, {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const fullUrl = `${apiUrl}/messages/conversations/${conversationId}/messages`;
+      
+      console.log('🔍 MessageThread - URL de l\'API:', apiUrl);
+      console.log('🔍 MessageThread - URL complète:', fullUrl);
+      console.log('🔍 MessageThread - Conversation ID:', conversationId);
+      
+      const response = await fetch(fullUrl, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
+      
+      console.log('🔍 MessageThread - Status de la réponse:', response.status);
+      console.log('🔍 MessageThread - Headers de la réponse:', Object.fromEntries(response.headers.entries()));
 
       if (!response.ok) {
         throw { response };
