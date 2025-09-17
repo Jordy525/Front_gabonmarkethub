@@ -208,7 +208,7 @@ class ApiClient {
 
 // Instance par défaut
 export const apiClient = new ApiClient({
-  baseURL: process.env.REACT_APP_API_URL || '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   timeout: 10000,
   retries: 3,
   retryDelay: 1000
