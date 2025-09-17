@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, User, Eye, ArrowLeft, Share2, BookOpen } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
+import SafeHtmlRenderer from '@/components/ui/SafeHtmlRenderer';
 
 interface BlogArticle {
   id: number;
@@ -288,9 +289,10 @@ const BlogArticle = () => {
                 
                 {/* Article Content */}
                 <div className="p-8">
-                  <div 
+                  <SafeHtmlRenderer 
+                    html={displayArticle.content}
                     className="prose prose-lg max-w-none"
-                    dangerouslySetInnerHTML={{ __html: displayArticle.content }}
+                    fallback={<p className="text-gray-500 italic">Aucun contenu disponible</p>}
                   />
                   
                   {/* Tags */}
