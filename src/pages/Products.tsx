@@ -172,7 +172,7 @@ const Products = () => {
 
   if (error) {
     return (
-      <Layout>
+      <ResponsiveLayout>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
           <div className="text-center">
             <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />

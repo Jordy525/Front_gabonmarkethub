@@ -99,10 +99,6 @@ export const ContactSupplierButton: React.FC<ContactSupplierButtonProps> = ({
               <div className="p-4 text-center text-gray-500">
                 Fonctionnalité de contact en cours de migration
               </div>
-                productName={product?.nom}
-                supplierName={supplier.nom_entreprise}
-                compact={true}
-              />
             </div>
             
             <div className="mt-4 flex justify-end space-x-2">
