@@ -180,16 +180,6 @@ export const COMPONENT_CONFIGS = {
     label: 'text-sm sm:text-base font-medium',
     input: 'w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base',
     button: 'w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base'
-  },
-  
-  // Tables
-  table: {
-    container: 'overflow-x-auto -mx-4 sm:mx-0',
-    table: 'min-w-full divide-y divide-gray-200',
-    header: 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium',
-    cell: 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm'
   }
 } as const;
 
-export { RESPONSIVE_CLASSES };
-export default RESPONSIVE_CLASSES;
