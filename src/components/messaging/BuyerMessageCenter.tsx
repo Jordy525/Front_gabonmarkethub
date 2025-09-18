@@ -169,25 +169,25 @@ export const BuyerMessageCenter: React.FC = () => {
         <Header />
       </div>
       
-      {/* Contenu principal avec hauteur fixe */}
-      <div className="flex-1 flex flex-col min-h-0">
+      {/* Contenu principal - PLEIN ÉCRAN */}
+      <div className="flex-1 flex flex-col bg-gray-50" style={{height: 'calc(100vh - 64px)'}}>
         {/* Header des actions - RESPONSIVE */}
-        <div className="flex-shrink-0 bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex-shrink-0 bg-white border-b border-gray-200 px-2 sm:px-6 py-2 sm:py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
             <div className="flex items-center gap-2 sm:gap-3">
-              <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+              <MessageCircle className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
               <div>
-                <h2 className="text-lg sm:text-xl font-semibold">Messages</h2>
-                <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block">
+                <h2 className="text-base sm:text-xl font-semibold">Messages</h2>
+                <p className="text-xs text-muted-foreground hidden sm:block">
                   Contactez les fournisseurs et gérez vos conversations
                 </p>
               </div>
             </div>
             
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1 sm:gap-3">
               <Button
                 onClick={() => setShowSupplierContactList(true)}
-                className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
+                className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 sm:px-4"
                 size="sm"
               >
                 <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -229,8 +229,8 @@ export const BuyerMessageCenter: React.FC = () => {
         {!showFullSupplierList && !showSupplierContactList && (
           <div className="flex-1 flex flex-col min-h-0">
             {/* Filtres et recherche - RESPONSIVE */}
-            <div className="flex-shrink-0 bg-white border-b border-gray-100 px-3 sm:px-6 py-3 sm:py-4">
-              <div className="flex flex-col gap-3 sm:gap-4">
+            <div className="flex-shrink-0 bg-white border-b border-gray-100 px-2 sm:px-6 py-2 sm:py-4">
+              <div className="flex flex-col gap-2 sm:gap-4">
                 {/* Barre de recherche */}
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -244,7 +244,7 @@ export const BuyerMessageCenter: React.FC = () => {
                 </div>
 
                 {/* Filtres */}
-                <div className="flex gap-2 overflow-x-auto pb-1">
+                <div className="flex gap-1 sm:gap-2 overflow-x-auto pb-1">
                   <Button
                     variant={filterStatus === 'all' ? 'default' : 'outline'}
                     size="sm"

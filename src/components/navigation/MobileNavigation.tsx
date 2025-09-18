@@ -174,22 +174,22 @@ const MobileNavigation = ({ isOpen, onClose, className }: MobileNavigationProps)
       
       {/* Navigation Panel */}
       <div className={cn(
-        "fixed inset-y-0 left-0 z-50 w-80 max-w-[85vw] bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:hidden",
+        "fixed inset-y-0 left-0 z-50 w-72 sm:w-80 max-w-[90vw] bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:hidden",
         isOpen ? "translate-x-0" : "-translate-x-full",
         className
       )}>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+        <div className="flex items-center justify-between p-3 sm:p-4 border-b border-gray-200">
+          <h2 className="text-base sm:text-lg font-semibold text-gray-900">
             Menu
           </h2>
           <Button
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="h-8 w-8"
+            className="h-8 w-8 flex-shrink-0"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
         </div>
 
@@ -197,28 +197,31 @@ const MobileNavigation = ({ isOpen, onClose, className }: MobileNavigationProps)
         <div className="flex flex-col h-full overflow-y-auto">
           {/* User Info */}
           {isAuthenticated && currentUser && (
-            <div className="p-4 border-b border-gray-200 bg-gray-50">
-              <div className="flex items-center space-x-3">
+            <div className="p-3 sm:p-4 border-b border-gray-200 bg-gray-50">
+              <div className="flex items-center space-x-2 sm:space-x-3">
                 <ProfileAvatar
                   photoUrl={photoData?.photo_profil}
                   name={`${(currentUser as any)?.nom} ${(currentUser as any)?.prenom}`}
-                  size="md"
+                  size="sm"
+                  className="flex-shrink-0"
                 />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">
+                  <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">
                     {(currentUser as any)?.nom} {(currentUser as any)?.prenom}
                   </p>
                   <p className="text-xs text-gray-500 truncate">
                     {(currentUser as any)?.email}
                   </p>
                 </div>
-                <UserNotificationBell />
+                <div className="flex-shrink-0">
+                  <UserNotificationBell />
+                </div>
               </div>
             </div>
           )}
 
           {/* Main Navigation */}
-          <div className="flex-1 p-4 space-y-2">
+          <div className="flex-1 p-3 sm:p-4 space-y-2 overflow-y-auto">
             {/* Navigation principale */}
             <div className="space-y-1">
               <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
@@ -228,15 +231,15 @@ const MobileNavigation = ({ isOpen, onClose, className }: MobileNavigationProps)
                 <Button
                   key={item.path}
                   variant="ghost"
-                  className="w-full justify-start h-12 px-3 text-left"
+                  className="w-full justify-start h-10 sm:h-12 px-2 sm:px-3 text-left"
                   onClick={() => handleNavigation(item.path)}
                 >
-                  <item.icon className="h-5 w-5 mr-3 text-gray-600" />
-                  <div className="flex-1">
-                    <div className="text-sm font-medium text-gray-900">
+                  <item.icon className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-gray-600 flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs sm:text-sm font-medium text-gray-900 truncate">
                       {item.label}
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-gray-500 truncate hidden sm:block">
                       {item.description}
                     </div>
                   </div>
@@ -246,7 +249,7 @@ const MobileNavigation = ({ isOpen, onClose, className }: MobileNavigationProps)
 
             {/* Navigation utilisateur */}
             {isAuthenticated && (
-              <div className="space-y-1 pt-4 border-t border-gray-200">
+              <div className="space-y-1 pt-3 sm:pt-4 border-t border-gray-200">
                 <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                   Mon compte
                 </h3>
@@ -254,22 +257,22 @@ const MobileNavigation = ({ isOpen, onClose, className }: MobileNavigationProps)
                   <Button
                     key={item.path}
                     variant="ghost"
-                    className="w-full justify-start h-12 px-3 text-left"
+                    className="w-full justify-start h-10 sm:h-12 px-2 sm:px-3 text-left"
                     onClick={() => handleNavigation(item.path)}
                   >
-                    <item.icon className="h-5 w-5 mr-3 text-gray-600" />
-                    <div className="flex-1">
+                    <item.icon className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-gray-600 flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-xs sm:text-sm font-medium text-gray-900 truncate">
                           {item.label}
                         </div>
                         {item.badge && (
-                          <Badge variant="secondary" className="ml-2">
+                          <Badge variant="secondary" className="ml-1 sm:ml-2 text-xs flex-shrink-0">
                             {item.badge > 9 ? '9+' : item.badge}
                           </Badge>
                         )}
                       </div>
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-gray-500 truncate hidden sm:block">
                         {item.description}
                       </div>
                     </div>
@@ -279,7 +282,7 @@ const MobileNavigation = ({ isOpen, onClose, className }: MobileNavigationProps)
             )}
 
             {/* Navigation support */}
-            <div className="space-y-1 pt-4 border-t border-gray-200">
+            <div className="space-y-1 pt-3 sm:pt-4 border-t border-gray-200">
               <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                 Support
               </h3>
@@ -287,15 +290,15 @@ const MobileNavigation = ({ isOpen, onClose, className }: MobileNavigationProps)
                 <Button
                   key={item.path}
                   variant="ghost"
-                  className="w-full justify-start h-12 px-3 text-left"
+                  className="w-full justify-start h-10 sm:h-12 px-2 sm:px-3 text-left"
                   onClick={() => handleNavigation(item.path)}
                 >
-                  <item.icon className="h-5 w-5 mr-3 text-gray-600" />
-                  <div className="flex-1">
-                    <div className="text-sm font-medium text-gray-900">
+                  <item.icon className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-gray-600 flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs sm:text-sm font-medium text-gray-900 truncate">
                       {item.label}
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-gray-500 truncate hidden sm:block">
                       {item.description}
                     </div>
                   </div>
@@ -305,28 +308,30 @@ const MobileNavigation = ({ isOpen, onClose, className }: MobileNavigationProps)
           </div>
 
           {/* Footer Actions */}
-          <div className="p-4 border-t border-gray-200 space-y-2">
+          <div className="p-3 sm:p-4 border-t border-gray-200 space-y-2 flex-shrink-0">
             {isAuthenticated ? (
               <Button
                 variant="outline"
-                className="w-full justify-start"
+                className="w-full justify-start text-red-600 border-red-200 hover:bg-red-50"
                 onClick={handleLogout}
                 disabled={isLoggingOut}
               >
-                <LogOut className="h-4 w-4 mr-2" />
-                {isLoggingOut ? 'Déconnexion...' : 'Se déconnecter'}
+                <LogOut className="h-4 w-4 mr-2 flex-shrink-0" />
+                <span className="truncate">
+                  {isLoggingOut ? 'Déconnexion...' : 'Se déconnecter'}
+                </span>
               </Button>
             ) : (
               <>
                 <Button
                   variant="outline"
-                  className="w-full"
+                  className="w-full text-sm"
                   onClick={() => handleNavigation('/login')}
                 >
                   Se connecter
                 </Button>
                 <Button
-                  className="w-full"
+                  className="w-full text-sm"
                   onClick={() => handleNavigation('/user-type')}
                 >
                   S'inscrire
