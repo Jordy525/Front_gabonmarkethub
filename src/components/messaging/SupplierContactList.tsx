@@ -174,33 +174,37 @@ export const SupplierContactList: React.FC<SupplierContactListProps> = ({
   return (
     <div className={className}>
       {/* En-tête */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row items-center justify-between mb-4 sm:mb-6 gap-3">
         {onBack && (
-          <Button variant="ghost" onClick={onBack} className="text-muted-foreground">
+          <Button variant="ghost" onClick={onBack} className="text-muted-foreground self-start sm:self-center">
             ← Retour
           </Button>
         )}
         <div className="flex-1 text-center">
-          <h2 className="text-2xl font-bold">Contacter un fournisseur</h2>
-          <p className="text-gray-600 mt-1">
-            Choisissez un fournisseur pour commencer une conversation
+          <h2 className="text-xl sm:text-2xl font-bold">
+            <span className="hidden sm:inline">Contacter un fournisseur</span>
+            <span className="sm:hidden">Contacter</span>
+          </h2>
+          <p className="text-sm sm:text-base text-gray-600 mt-1">
+            <span className="hidden sm:inline">Choisissez un fournisseur pour commencer une conversation</span>
+            <span className="sm:hidden">Choisissez un fournisseur</span>
           </p>
         </div>
-        <div className="w-20" /> {/* Espaceur pour centrer le titre */}
+        <div className="hidden sm:block w-20" /> {/* Espaceur pour centrer le titre */}
       </div>
 
       {/* Filtres et recherche */}
-      <Card className="mb-6">
-        <CardContent className="p-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <Card className="mb-4 sm:mb-6">
+        <CardContent className="p-3 sm:p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {/* Recherche */}
-            <div className="relative">
+            <div className="relative sm:col-span-2 lg:col-span-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Rechercher un fournisseur..."
+                placeholder="Rechercher..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-10 text-sm sm:text-base"
               />
             </div>
             
@@ -209,11 +213,11 @@ export const SupplierContactList: React.FC<SupplierContactListProps> = ({
               <select
                 value={selectedSector}
                 onChange={(e) => setSelectedSector(e.target.value)}
-                className="px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white w-full"
+                className="px-3 py-2 text-sm sm:text-base border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white w-full"
                 disabled={sectorsLoading}
               >
                 <option value="all">
-                  {sectorsLoading ? 'Chargement...' : 'Tous les secteurs'}
+                  {sectorsLoading ? 'Chargement...' : 'Tous secteurs'}
                 </option>
                 {sectors.map((sector: string) => (
                   <option key={sector} value={sector}>{sector}</option>
@@ -229,11 +233,11 @@ export const SupplierContactList: React.FC<SupplierContactListProps> = ({
               <select
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
-                className="px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white w-full"
+                className="px-3 py-2 text-sm sm:text-base border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white w-full"
                 disabled={citiesLoading}
               >
                 <option value="all">
-                  {citiesLoading ? 'Chargement...' : 'Toutes les villes'}
+                  {citiesLoading ? 'Chargement...' : 'Toutes villes'}
                 </option>
                 {cities.map((city: string) => (
                   <option key={city} value={city}>{city}</option>
@@ -248,18 +252,18 @@ export const SupplierContactList: React.FC<SupplierContactListProps> = ({
       </Card>
 
       {/* Statistiques */}
-      <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 gap-1 sm:gap-0">
         <span>{filteredSuppliers.length} fournisseur(s) trouvé(s)</span>
-        {searchTerm && <span>Recherche : "{searchTerm}"</span>}
+        {searchTerm && <span className="truncate">Recherche : "{searchTerm}"</span>}
       </div>
 
       {/* Liste des fournisseurs avec scroll */}
-      <div className="max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+      <div className="max-h-[70vh] sm:max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <Card key={i}>
-                <CardContent className="p-4">
+                <CardContent className="p-3 sm:p-4">
                   <div className="animate-pulse">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
@@ -298,12 +302,12 @@ export const SupplierContactList: React.FC<SupplierContactListProps> = ({
             </CardContent>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {filteredSuppliers.map((supplier: Supplier) => (
               <Card key={supplier.id} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    <Avatar className="w-12 h-12">
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-start gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <Avatar className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
                       <AvatarFallback>
                         {supplier.logo_url ? (
                           <img 
@@ -318,21 +322,22 @@ export const SupplierContactList: React.FC<SupplierContactListProps> = ({
                     </Avatar>
                     
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-medium text-gray-900 truncate">
+                      <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                        <h3 className="font-medium text-sm sm:text-base text-gray-900 truncate">
                           {supplier.nom_entreprise}
                         </h3>
                         {supplier.statut_verification === 'verifie' && (
-                          <Badge variant="secondary" className="text-xs">
+                          <Badge variant="secondary" className="text-xs flex-shrink-0">
                             <Shield className="w-3 h-3 mr-1" />
-                            Vérifié
+                            <span className="hidden sm:inline">Vérifié</span>
+                            <span className="sm:hidden">✓</span>
                           </Badge>
                         )}
                       </div>
                       
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Star className="w-3 h-3 text-yellow-500" />
-                        <span>
+                      <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-600">
+                        <Star className="w-3 h-3 text-yellow-500 flex-shrink-0" />
+                        <span className="truncate">
                           {supplier.note_moyenne ? Number(supplier.note_moyenne).toFixed(1) : 'N/A'}
                           ({supplier.nombre_avis || 0})
                         </span>
@@ -341,39 +346,40 @@ export const SupplierContactList: React.FC<SupplierContactListProps> = ({
                   </div>
 
                   {supplier.description && (
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                    <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 line-clamp-2">
                       {supplier.description}
                     </p>
                   )}
 
-                  <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs text-gray-500 mb-2 sm:mb-3">
                     {supplier.secteur_activite && (
                       <div className="flex items-center gap-1">
-                        <Building2 className="w-3 h-3" />
-                        <span>{supplier.secteur_activite}</span>
+                        <Building2 className="w-3 h-3 flex-shrink-0" />
+                        <span className="truncate">{supplier.secteur_activite}</span>
                       </div>
                     )}
                     {supplier.ville && (
                       <div className="flex items-center gap-1">
-                        <MapPin className="w-3 h-3" />
-                        <span>{supplier.ville}</span>
+                        <MapPin className="w-3 h-3 flex-shrink-0" />
+                        <span className="truncate">{supplier.ville}</span>
                       </div>
                     )}
                   </div>
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1 text-xs text-gray-500">
-                      <Package className="w-3 h-3" />
-                      <span>{supplier.nombre_produits || 0} produits</span>
+                      <Package className="w-3 h-3 flex-shrink-0" />
+                      <span className="truncate">{supplier.nombre_produits || 0} produits</span>
                     </div>
                     
                     <Button
                       size="sm"
                       onClick={() => handleContactSupplier(supplier)}
-                      className="bg-green-600 hover:bg-green-700"
+                      className="bg-green-600 hover:bg-green-700 text-xs sm:text-sm flex-shrink-0"
                     >
                       <MessageCircle className="w-3 h-3 mr-1" />
-                      Contacter
+                      <span className="hidden sm:inline">Contacter</span>
+                      <span className="sm:hidden">Contact</span>
                     </Button>
                   </div>
                 </CardContent>

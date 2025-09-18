@@ -163,7 +163,7 @@ export const BuyerMessageCenter: React.FC = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="min-h-screen flex flex-col">
       {/* Header normal pour les acheteurs - FIXE */}
       <div className="flex-shrink-0">
         <Header />

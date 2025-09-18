@@ -44,17 +44,17 @@ export const TypingIndicator: React.FC<TypingIndicatorProps> = ({
 
   return (
     <div className={cn(
-      'flex items-center space-x-2 text-sm text-gray-500 px-3 py-2',
+      'flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-gray-500 px-2 sm:px-3 py-1 sm:py-2',
       className
     )}>
       {showAnimation && (
-        <div className="flex space-x-1">
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+        <div className="flex space-x-0.5 sm:space-x-1 flex-shrink-0">
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
         </div>
       )}
-      <span className="italic">
+      <span className="italic truncate">
         {formatTypingText()}...
       </span>
     </div>
@@ -77,12 +77,12 @@ export const CompactTypingIndicator: React.FC<{
       'flex items-center space-x-1 text-xs text-gray-400',
       className
     )}>
-      <div className="flex space-x-0.5">
+      <div className="flex space-x-0.5 flex-shrink-0">
         <div className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
         <div className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
         <div className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
       </div>
-      <span>
+      <span className="truncate">
         {typingUsers.length === 1 ? 'En train d\'écrire' : `${typingUsers.length} en train d'écrire`}
       </span>
     </div>
@@ -102,14 +102,14 @@ export const AvatarTypingIndicator: React.FC<{
 
   return (
     <div className={cn(
-      'flex items-center space-x-2 px-3 py-2 bg-gray-50 rounded-lg',
+      'flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3 py-1 sm:py-2 bg-gray-50 rounded-lg',
       className
     )}>
-      <div className="flex -space-x-1">
+      <div className="flex -space-x-0.5 sm:-space-x-1 flex-shrink-0">
         {typingUsers.slice(0, 3).map((user) => (
           <div
             key={user.id}
-            className="w-6 h-6 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-xs font-medium text-gray-600"
+            className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-xs font-medium text-gray-600"
             title={user.name}
           >
             {user.avatar ? (
@@ -124,19 +124,19 @@ export const AvatarTypingIndicator: React.FC<{
           </div>
         ))}
         {typingUsers.length > 3 && (
-          <div className="w-6 h-6 rounded-full bg-gray-400 border-2 border-white flex items-center justify-center text-xs font-medium text-white">
+          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gray-400 border-2 border-white flex items-center justify-center text-xs font-medium text-white">
             +{typingUsers.length - 3}
           </div>
         )}
       </div>
       
-      <div className="flex items-center space-x-1">
-        <div className="flex space-x-0.5">
-          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+      <div className="flex items-center space-x-1 min-w-0">
+        <div className="flex space-x-0.5 flex-shrink-0">
+          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+          <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
         </div>
-        <span className="text-sm text-gray-500 italic">
+        <span className="text-xs sm:text-sm text-gray-500 italic truncate">
           {typingUsers.length === 1 
             ? `${typingUsers[0].name} est en train d'écrire` 
             : `${typingUsers.length} personnes écrivent`

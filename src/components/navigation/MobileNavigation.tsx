@@ -12,7 +12,6 @@ import {
   Settings, 
   LogOut,
   ChevronDown,
-  ShoppingCart,
   Heart,
   FileText,
   HelpCircle
@@ -126,12 +125,6 @@ const MobileNavigation = ({ isOpen, onClose, className }: MobileNavigationProps)
       path: '/favorites', 
       icon: Heart,
       description: 'Vos produits favoris'
-    },
-    { 
-      label: 'Commandes', 
-      path: '/orders', 
-      icon: ShoppingCart,
-      description: 'Historique des commandes'
     },
     { 
       label: 'Profil', 

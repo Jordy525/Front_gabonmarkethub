@@ -60,8 +60,8 @@ export const VirtualizedConversationList: React.FC<VirtualizedConversationListPr
   if (itemCount === 0) {
     return (
       <div className={`flex items-center justify-center ${className}`} style={{ height }}>
-        <div className="text-center text-gray-500">
-          <p>Aucune conversation</p>
+        <div className="text-center text-gray-500 px-4">
+          <p className="text-sm sm:text-base">Aucune conversation</p>
         </div>
       </div>
     );

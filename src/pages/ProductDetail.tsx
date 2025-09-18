@@ -156,8 +156,8 @@ const ProductDetail = () => {
   return (
     <Layout>
       <div className="min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 py-8">
-          <BackButton fallbackPath="/products" className="mb-4" />
+        <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
+          <BackButton fallbackPath="/products" className="mb-3 sm:mb-4" />
           <Breadcrumb
             items={[
               { label: "Produits", href: "/products" },
@@ -166,9 +166,9 @@ const ProductDetail = () => {
             ]}
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
             {/* Images */}
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div className="aspect-square bg-white rounded-lg overflow-hidden relative">
                 <img
                   src={images[selectedImage]}
@@ -184,18 +184,18 @@ const ProductDetail = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="absolute top-4 right-4 bg-white/80 hover:bg-white"
+                  className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/80 hover:bg-white"
                   onClick={() => setImageModalOpen(true)}
                 >
                   <Eye className="w-4 h-4" />
                 </Button>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 overflow-x-auto pb-2">
                 {images.map((image: string, index: number) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`w-20 h-20 rounded-lg overflow-hidden border-2 ${selectedImage === index ? 'border-green-600' : 'border-gray-200'
+                    className={`w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 flex-shrink-0 ${selectedImage === index ? 'border-green-600' : 'border-gray-200'
                       }`}
                   >
                     <img
@@ -218,7 +218,7 @@ const ProductDetail = () => {
                 {product.featured && (
                   <Badge className="mb-2 bg-yellow-400 text-gray-800">Produit Vedette</Badge>
                 )}
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.nom}</h1>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">{product.nom}</h1>
                 <p className="text-gray-600 mb-4">{product.description}</p>
 
                 {/* Supplier Info */}
@@ -238,15 +238,15 @@ const ProductDetail = () => {
               </div>
 
               {/* Pricing Information */}
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
                 {isAuthenticated ? (
                   <div className="mb-6">
                     <div className="flex items-baseline gap-2 mb-2">
-                      <span className="text-2xl font-bold text-gray-900">
+                      <span className="text-xl sm:text-2xl font-bold text-gray-900">
                         {product.prix_unitaire}€
                       </span>
                       {product.unite && product.unite !== 'kg' && (
-                        <span className="text-gray-600">/ {product.unite}</span>
+                        <span className="text-xs sm:text-sm text-gray-600">/ {product.unite}</span>
                       )}
                     </div>
                     <p className="text-sm text-gray-600 mb-4">
@@ -264,7 +264,7 @@ const ProductDetail = () => {
                   </div>
                 )}
 
-                <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 text-sm">
                   <div>
                     <span className="text-gray-600">MOQ:</span>
                     <span className="font-medium ml-1">{product.moq || 1} unités</span>
@@ -290,10 +290,11 @@ const ProductDetail = () => {
                         <MessageCircle className="w-5 h-5 mr-2" />
                         Contacter le fournisseur
                       </Button>
-                      <div className="grid grid-cols-2 gap-3">
-                        <Button variant="outline" size="lg" onClick={addToFavorites}>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <Button variant="outline" size="lg" onClick={addToFavorites} className="text-sm sm:text-base">
                           <Heart className="w-4 h-4 mr-2" />
-                          Favoris
+                          <span className="hidden sm:inline">Favoris</span>
+                          <span className="sm:hidden">♥</span>
                         </Button>
                         <Button
                           variant="outline"
@@ -317,19 +318,20 @@ const ProductDetail = () => {
                         <p className="text-sm text-blue-700 mb-4">
                           Connectez-vous pour contacter le fournisseur, demander un devis et accéder aux prix
                         </p>
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <Button
                             onClick={() => navigate('/login')}
-                            className="bg-blue-600 hover:bg-blue-700"
+                            className="bg-blue-600 hover:bg-blue-700 text-sm sm:text-base"
                           >
                             Se connecter
                           </Button>
                           <Button
                             variant="outline"
                             onClick={() => navigate('/register')}
-                            className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+                            className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm sm:text-base"
                           >
-                            Créer un compte
+                            <span className="hidden sm:inline">Créer un compte</span>
+                            <span className="sm:hidden">S'inscrire</span>
                           </Button>
                         </div>
                       </div>
@@ -338,16 +340,16 @@ const ProductDetail = () => {
                 </div>
 
                 {/* Trust Badges */}
-                <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mt-6 pt-6 border-t">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
                     <Shield className="w-4 h-4 text-green-600" />
                     Paiement sécurisé
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
                     <Truck className="w-4 h-4 text-blue-600" />
                     Livraison rapide
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
                     <Award className="w-4 h-4 text-yellow-600" />
                     Qualité garantie
                   </div>
@@ -359,7 +361,7 @@ const ProductDetail = () => {
           {/* Product Details Tabs */}
           <div className="bg-white rounded-lg shadow-sm">
             <div className="border-b">
-              <nav className="flex space-x-8 px-6">
+              <nav className="flex space-x-4 sm:space-x-8 px-3 sm:px-6 overflow-x-auto">
                 {["description", "specifications", "avis", "statistiques", "fournisseur"].map((tab) => (
                   <button
                     key={tab}
@@ -379,7 +381,7 @@ const ProductDetail = () => {
               </nav>
             </div>
 
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
               {activeTab === "description" && (
                 <div className="space-y-6">
                   <div>
