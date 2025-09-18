@@ -6,7 +6,7 @@ import { useLogin } from "@/hooks/api/useAuth";
 import { authService } from "@/services/authService";
 import { toast } from "sonner";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
+import ResponsiveLayout from "@/components/layout/ResponsiveLayout";
 import Logo from "@/components/ui/Logo";
 
 const Login = () => {
@@ -110,7 +110,7 @@ const Login = () => {
   };
 
   return (
-    <Layout>
+    <ResponsiveLayout>
       <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           {/* Header */}
@@ -319,7 +319,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </ResponsiveLayout>
   );
 };
 

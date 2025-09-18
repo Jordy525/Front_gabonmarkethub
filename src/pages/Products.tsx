@@ -7,7 +7,7 @@ import { BackButton } from "@/components/ui/back-button";
 import CategorySidebarWrapper from "@/components/categories/CategorySidebarWrapper";
 import { toast } from "sonner";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
+import ResponsiveLayout from "@/components/layout/ResponsiveLayout";
 import { useIsAuthenticated } from "@/hooks/api/useAuth";
 
 import { useQuery } from "@tanstack/react-query";
@@ -183,12 +183,12 @@ const Products = () => {
             </Button>
           </div>
         </div>
-      </Layout>
+      </ResponsiveLayout>
     );
   }
 
   return (
-    <Layout>
+    <ResponsiveLayout>
       <div className="min-h-screen bg-gray-50">
         <div className="bg-white shadow-sm border-b">
           <div className="container mx-auto px-4 py-6">
@@ -512,7 +512,7 @@ const Products = () => {
       </div>
       
 
-    </Layout>
+    </ResponsiveLayout>
   );
 };
 

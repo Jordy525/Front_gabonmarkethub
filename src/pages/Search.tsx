@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '@/components/layout/Layout';
+import ResponsiveLayout from '@/components/layout/ResponsiveLayout';
 import { AdvancedSearch } from '@/components/search/AdvancedSearch';
 import { TrendingUp, Search as SearchIcon, Filter, Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -41,7 +41,7 @@ const Search: React.FC = () => {
   ];
 
   return (
-    <Layout>
+    <ResponsiveLayout>
       <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-8 max-w-6xl">
           {/* Header */}
@@ -158,7 +158,7 @@ const Search: React.FC = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </ResponsiveLayout>
   );
 };
 

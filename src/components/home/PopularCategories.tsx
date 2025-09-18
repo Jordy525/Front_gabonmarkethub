@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/services/api";
+import { RESPONSIVE_CLASSES } from "@/config/responsive";
 
 interface Category {
   id: number;
@@ -285,14 +286,14 @@ const PopularCategories = () => {
   };
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
+    <section className={`${RESPONSIVE_CLASSES.spacing.section} bg-white`}>
+      <div className={RESPONSIVE_CLASSES.container}>
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className={`${RESPONSIVE_CLASSES.text.h2} font-bold text-gray-900 mb-4`}>
             Catégories Populaires
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className={`${RESPONSIVE_CLASSES.text.body} text-gray-600 max-w-2xl mx-auto`}>
             Explorez nos catégories les plus demandées par les professionnels gabonais
           </p>
         </div>

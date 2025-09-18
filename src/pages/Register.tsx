@@ -8,7 +8,7 @@ import { useRegister } from "@/hooks/api/useAuth";
 import { apiClient } from "@/services/api";
 import { toast } from "sonner";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
+import ResponsiveLayout from "@/components/layout/ResponsiveLayout";
 import Logo from "@/components/ui/Logo";
 import RegisterWithVerification from "./RegisterWithVerification";
 
@@ -858,7 +858,7 @@ const Register = () => {
 
 
   return (
-    <Layout>
+    <ResponsiveLayout>
       <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl w-full space-y-8">
           {/* Header */}
@@ -1216,7 +1216,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-    </Layout>
+    </ResponsiveLayout>
   );
 };
 

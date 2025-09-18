@@ -322,3 +322,4 @@ const ResponsiveProducts = () => {
 };
 
 export default ResponsiveProducts;
+

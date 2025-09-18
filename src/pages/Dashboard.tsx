@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import Layout from "@/components/layout/Layout";
+import ResponsiveLayout from "@/components/layout/ResponsiveLayout";
+import { RESPONSIVE_CLASSES } from "@/config/responsive";
 import { useCurrentUser, useLogout } from "@/hooks/api/useAuth";
 import { useDashboardStats, useRecentOrders, useFavoriteProducts } from "@/hooks/api/useDashboard";
 import { useNavigate } from "react-router-dom";
@@ -70,9 +71,9 @@ const Dashboard = () => {
 
 
   return (
-    <Layout>
+    <ResponsiveLayout>
       <div className="min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 py-4 sm:py-8">
+        <div className={RESPONSIVE_CLASSES.container}>
           {/* Header avec barre de recherche */}
           <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 mb-6">
             <div className="flex flex-col lg:flex-row lg:items-center gap-4">
@@ -390,7 +391,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </ResponsiveLayout>
   );
 };
 

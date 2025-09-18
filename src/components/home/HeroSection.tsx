@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/services/api";
+import { RESPONSIVE_CLASSES } from "@/config/responsive";
 
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -65,15 +66,15 @@ const HeroSection = () => {
       <div className="absolute top-20 left-10 w-32 h-32 bg-yellow-400/20 rounded-full blur-xl"></div>
       <div className="absolute bottom-20 right-10 w-40 h-40 bg-green-400/20 rounded-full blur-xl"></div>
 
-      <div className="relative container mx-auto px-4 py-20 lg:py-32">
+      <div className={`relative ${RESPONSIVE_CLASSES.container} py-12 sm:py-16 lg:py-20 xl:py-32`}>
         <div className="max-w-4xl mx-auto text-center">
           {/* Main heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 opacity-0 animate-[fadeIn_0.5s_ease-in-out_forwards]">
+          <h1 className={`${RESPONSIVE_CLASSES.text.h1} font-bold mb-6 opacity-0 animate-[fadeIn_0.5s_ease-in-out_forwards]`}>
             Connecter l'<span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Italie</span> et le
             <span className="bg-gradient-to-r from-yellow-400 to-yellow-500 bg-clip-text text-transparent">Gabon</span>
           </h1>
 
-          <p className="text-xl md:text-2xl mb-8 text-white/90 opacity-0 animate-[slideUp_0.3s_ease-out_0.2s_forwards]">
+          <p className={`${RESPONSIVE_CLASSES.text.large} mb-8 text-white/90 opacity-0 animate-[slideUp_0.3s_ease-out_0.2s_forwards]`}>
             Plateforme dédiée aux échanges commerciaux entre entreprises italiennes et artisans gabonais.
             Découvrez des produits authentiques, négociez directement et développez vos partenariats.
           </p>

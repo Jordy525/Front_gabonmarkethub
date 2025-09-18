@@ -362,3 +362,4 @@ const ResponsiveProductCard = ({
 };
 
 export default ResponsiveProductCard;
+

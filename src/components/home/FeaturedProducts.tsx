@@ -5,6 +5,7 @@ import { StarRating } from "@/components/ui/star-rating";
 import { useQuery } from "@tanstack/react-query";
 import { productService } from "@/services/productService";
 import { getImageUrl } from "@/config/constants";
+import { RESPONSIVE_CLASSES } from "@/config/responsive";
 
 
 
@@ -25,8 +26,8 @@ const FeaturedProducts = () => {
 
   if (isLoading) {
     return (
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="container mx-auto px-4">
+      <section className={`${RESPONSIVE_CLASSES.spacing.sectionLarge} bg-white`}>
+        <div className={RESPONSIVE_CLASSES.container}>
           <div className="flex justify-center items-center h-64">
             <Loader2 className="w-8 h-8 animate-spin text-green-600" />
             <span className="ml-2 text-gray-600">Chargement des produits...</span>
@@ -38,8 +39,8 @@ const FeaturedProducts = () => {
 
   if (error) {
     return (
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="container mx-auto px-4">
+      <section className={`${RESPONSIVE_CLASSES.spacing.sectionLarge} bg-white`}>
+        <div className={RESPONSIVE_CLASSES.container}>
           <div className="text-center">
             <p className="text-red-600">Erreur lors du chargement des produits</p>
             <Button variant="outline" onClick={() => window.location.reload()}>
@@ -53,8 +54,8 @@ const FeaturedProducts = () => {
 
   if (!featuredProducts || featuredProducts.length === 0) {
     return (
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="container mx-auto px-4">
+      <section className={`${RESPONSIVE_CLASSES.spacing.sectionLarge} bg-white`}>
+        <div className={RESPONSIVE_CLASSES.container}>
           <div className="text-center">
             <p className="text-gray-600">Aucun produit vedette disponible</p>
           </div>
@@ -63,14 +64,14 @@ const FeaturedProducts = () => {
     );
   }
   return (
-    <section className="py-16 lg:py-24 bg-white">
-      <div className="container mx-auto px-4">
+    <section className={`${RESPONSIVE_CLASSES.spacing.sectionLarge} bg-white`}>
+      <div className={RESPONSIVE_CLASSES.container}>
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className={`${RESPONSIVE_CLASSES.text.h2} font-bold text-gray-900 mb-4`}>
             Produits vedettes
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className={`${RESPONSIVE_CLASSES.text.body} text-gray-600 max-w-2xl mx-auto`}>
             Découvrez notre sélection de produits populaires avec les meilleurs fournisseurs vérifiés.
             Prix compétitifs et qualité garantie.
           </p>

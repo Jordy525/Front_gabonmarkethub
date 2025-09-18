@@ -16,7 +16,7 @@ import ProfilePhotoUpload from "@/components/profile/ProfilePhotoUpload";
 import { useProfilePhoto } from "@/hooks/useProfilePhoto";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
+import ResponsiveLayout from "@/components/layout/ResponsiveLayout";
 import SupplierLayout from "@/components/layout/SupplierLayout";
 import { apiClient } from "@/services/api";
 
@@ -124,7 +124,7 @@ const Profile = () => {
     }
   }, [user]);
 
-  const LayoutComponent = isSupplier ? SupplierLayout : Layout;
+  const LayoutComponent = isSupplier ? SupplierLayout : ResponsiveLayout;
 
   const handleLogout = () => {
     logoutMutation.mutate();

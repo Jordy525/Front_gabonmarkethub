@@ -131,3 +131,4 @@ export const ResponsiveTableCell = ({
 };
 
 export default ResponsiveTable;
+

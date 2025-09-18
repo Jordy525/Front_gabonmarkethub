@@ -1,4 +1,4 @@
-import Layout from "@/components/layout/Layout";
+import ResponsiveLayout from "@/components/layout/ResponsiveLayout";
 import HeroSection from "@/components/home/HeroSection";
 import CategoriesSection from "@/components/home/CategoriesSection";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
@@ -15,7 +15,7 @@ import FeaturedCategories from "@/components/home/FeaturedCategories";
 
 const Index = () => {
   return (
-    <Layout>
+    <ResponsiveLayout>
       <HeroSection />
       <PopularCategories />
       
@@ -64,7 +64,7 @@ const Index = () => {
       />
       
       <NewsletterSection />
-    </Layout>
+    </ResponsiveLayout>
   );
 };
 
