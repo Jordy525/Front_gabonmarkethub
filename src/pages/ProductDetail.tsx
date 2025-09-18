@@ -167,13 +167,13 @@ const ProductDetail = () => {
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
-            {/* Images */}
+            {/* Images - PLEIN ÉCRAN sur mobile */}
             <div className="space-y-3 sm:space-y-4">
               <div className="aspect-square bg-white rounded-lg overflow-hidden relative">
                 <img
                   src={images[selectedImage]}
                   alt={product.nom}
-                  className="w-full h-full object-contain cursor-pointer bg-white"
+                  className="w-full h-full object-cover sm:object-contain cursor-pointer bg-white"
                   onClick={() => setImageModalOpen(true)}
                   crossOrigin="anonymous"
                   style={{ maxHeight: '500px' }}
@@ -184,24 +184,25 @@ const ProductDetail = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/80 hover:bg-white"
+                  className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/80 hover:bg-white text-xs sm:text-sm"
                   onClick={() => setImageModalOpen(true)}
                 >
-                  <Eye className="w-4 h-4" />
+                  <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline ml-1">Agrandir</span>
                 </Button>
               </div>
-              <div className="flex gap-2 overflow-x-auto pb-2">
+              <div className="flex gap-1 sm:gap-2 overflow-x-auto pb-2">
                 {images.map((image: string, index: number) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 flex-shrink-0 ${selectedImage === index ? 'border-green-600' : 'border-gray-200'
+                    className={`w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-md sm:rounded-lg overflow-hidden border-2 flex-shrink-0 ${selectedImage === index ? 'border-green-600' : 'border-gray-200'
                       }`}
                   >
                     <img
                       src={image}
                       alt={`${product.nom} ${index + 1}`}
-                      className="w-full h-full object-contain bg-white"
+                      className="w-full h-full object-cover sm:object-contain bg-white"
                       crossOrigin="anonymous"
                       onError={(e) => {
                         e.currentTarget.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=80&h=80&fit=crop';
@@ -281,14 +282,15 @@ const ProductDetail = () => {
                     <>
                       <Button
                         size="lg"
-                        className="w-full bg-gabon-green hover:bg-gabon-green/90"
+                        className="w-full bg-gabon-green hover:bg-gabon-green/90 text-sm sm:text-base"
                         onClick={() => {
                           trackClick('view');
                           navigate(`/messages?supplier=${product.fournisseur_id}&product=${product.id}&productName=${encodeURIComponent(product.nom)}`);
                         }}
                       >
-                        <MessageCircle className="w-5 h-5 mr-2" />
-                        Contacter le fournisseur
+                        <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                        <span className="hidden sm:inline">Contacter le fournisseur</span>
+                        <span className="sm:hidden">💬 Contacter</span>
                       </Button>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <Button variant="outline" size="lg" onClick={addToFavorites} className="text-sm sm:text-base">
@@ -299,13 +301,15 @@ const ProductDetail = () => {
                         <Button
                           variant="outline"
                           size="lg"
+                          className="text-sm sm:text-base"
                           onClick={() => {
                             trackClick('view');
                             navigate(`/messages?supplier=${product.fournisseur_id}&product=${product.id}&productName=${encodeURIComponent(product.nom)}&action=quote`);
                           }}
                         >
                           <MessageCircle className="w-4 h-4 mr-2" />
-                          Demander un devis
+                          <span className="hidden sm:inline">Demander un devis</span>
+                          <span className="sm:hidden">📋 Devis</span>
                         </Button>
                       </div>
                     </>

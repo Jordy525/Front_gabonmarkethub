@@ -67,7 +67,7 @@ export const ConversationListItem: React.FC<ConversationListItemProps> = memo(({
   return (
     <div
       className={cn(
-        'p-3 cursor-pointer transition-colors border-b border-gray-100 hover:bg-gray-50',
+        'p-2 sm:p-3 cursor-pointer transition-colors border-b border-gray-100 hover:bg-gray-50',
         {
           'bg-blue-50 border-blue-200': isSelected,
           'bg-blue-25': hasUnread && !isSelected
@@ -76,40 +76,42 @@ export const ConversationListItem: React.FC<ConversationListItemProps> = memo(({
       )}
       onClick={onSelect}
     >
-      <div className="flex items-start space-x-3">
+      <div className="flex items-start space-x-2 sm:space-x-3">
         {/* Avatar */}
         <div className="relative flex-shrink-0">
-          <Avatar className="w-10 h-10">
+          <Avatar className="w-8 h-8 sm:w-10 sm:h-10">
             <AvatarImage src={getParticipantAvatar()} />
-            <AvatarFallback>
+            <AvatarFallback className="text-xs sm:text-sm">
               {getParticipantName().charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
           
           {/* Indicateur de statut en ligne (optionnel) */}
           {conversation.statut === 'ouverte' && (
-            <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 border-2 border-white rounded-full" />
+            <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 sm:w-3 sm:h-3 bg-green-400 border-2 border-white rounded-full" />
           )}
         </div>
 
         {/* Contenu de la conversation */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-1">
-            <div className="flex items-center space-x-2 min-w-0">
+            <div className="flex items-center space-x-1 sm:space-x-2 min-w-0 flex-1">
               <h3 className={cn(
-                'text-sm truncate',
+                'text-xs sm:text-sm truncate',
                 hasUnread ? 'font-semibold text-gray-900' : 'font-medium text-gray-700'
               )}>
                 {getParticipantName()}
               </h3>
-              {getPriorityIcon()}
-              {getContextIcon()}
+              <div className="flex items-center space-x-1 flex-shrink-0">
+                {getPriorityIcon()}
+                {getContextIcon()}
+              </div>
             </div>
             
-            <div className="flex items-center space-x-2 flex-shrink-0">
+            <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
               <UnreadCounter count={unreadCount} size="sm" />
-              <span className="text-xs text-gray-500">
-                                {formatDateSafely(conversation.updated_at, {
+              <span className="text-xs text-gray-500 hidden sm:inline">
+                {formatDateSafely(conversation.updated_at, {
                   addSuffix: true,
                   fallback: 'Récemment'
                 })}
@@ -120,7 +122,7 @@ export const ConversationListItem: React.FC<ConversationListItemProps> = memo(({
           {/* Sujet de la conversation */}
           {conversation.sujet && (
             <p className={cn(
-              'text-sm mb-1 truncate',
+              'text-xs sm:text-sm mb-1 truncate',
               hasUnread ? 'font-medium text-gray-900' : 'text-gray-600'
             )}>
               {conversation.sujet}
@@ -129,8 +131,8 @@ export const ConversationListItem: React.FC<ConversationListItemProps> = memo(({
 
           {/* Dernier message */}
           {conversation.dernier_message && (
-            <div className="flex items-center space-x-2 mb-2">
-              <p className="text-sm text-gray-500 truncate flex-1">
+            <div className="flex items-center space-x-1 sm:space-x-2 mb-1 sm:mb-2">
+              <p className="text-xs sm:text-sm text-gray-500 truncate flex-1">
                 {conversation.dernier_message.contenu}
               </p>
               {conversation.dernier_message.expediteur_id && (
@@ -144,26 +146,26 @@ export const ConversationListItem: React.FC<ConversationListItemProps> = memo(({
 
           {/* Tags et contexte */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 min-w-0 flex-1">
               <ConversationContextBadge conversation={conversation} />
               
               {conversation.tags && conversation.tags.length > 0 && (
-                <div className="flex space-x-1">
-                  {conversation.tags.slice(0, 2).map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-xs px-1.5 py-0.5">
+                <div className="flex space-x-1 overflow-hidden">
+                  {conversation.tags.slice(0, 1).map((tag, index) => (
+                    <Badge key={index} variant="outline" className="text-xs px-1 sm:px-1.5 py-0.5 truncate">
                       {tag}
                     </Badge>
                   ))}
-                  {conversation.tags.length > 2 && (
-                    <Badge variant="outline" className="text-xs px-1.5 py-0.5">
-                      +{conversation.tags.length - 2}
+                  {conversation.tags.length > 1 && (
+                    <Badge variant="outline" className="text-xs px-1 sm:px-1.5 py-0.5 flex-shrink-0">
+                      +{conversation.tags.length - 1}
                     </Badge>
                   )}
                 </div>
               )}
             </div>
             
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-1 flex-shrink-0">
               {conversation.archivee && (
                 <Archive className="w-3 h-3 text-gray-400" />
               )}

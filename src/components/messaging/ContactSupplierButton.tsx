@@ -75,40 +75,53 @@ export const ContactSupplierButton: React.FC<ContactSupplierButtonProps> = ({
             onClick={handleContactClick}
             className={className}
           >
-            {showIcon && <MessageCircle className="w-4 h-4 mr-2" />}
-            {children || 'Contacter le fournisseur'}
+            {showIcon && <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />}
+            <span className="text-xs sm:text-sm">
+              {children || (
+                <>
+                  <span className="hidden sm:inline">Contacter le fournisseur</span>
+                  <span className="sm:hidden">Contacter</span>
+                </>
+              )}
+            </span>
           </Button>
         </DialogTrigger>
         
-        <DialogContent className="max-w-4xl h-[80vh] p-0">
-          <DialogHeader className="p-6 pb-0">
-            <DialogTitle className="flex items-center space-x-2">
-              <MessageCircle className="w-5 h-5" />
-              <span>Chat avec {supplier.nom_entreprise}</span>
+        <DialogContent className="max-w-4xl h-[90vh] sm:h-[80vh] p-0 m-2 sm:m-4">
+          <DialogHeader className="p-4 sm:p-6 pb-0">
+            <DialogTitle className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
+              <div className="flex items-center space-x-2">
+                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base truncate">Chat avec {supplier.nom_entreprise}</span>
+              </div>
               {product && (
-                <span className="text-sm text-gray-600 font-normal">
+                <span className="text-xs sm:text-sm text-gray-600 font-normal truncate">
                   • À propos de "{product.nom}"
                 </span>
               )}
             </DialogTitle>
           </DialogHeader>
           
-          <div className="flex-1 p-6 pt-0">
-            <div className="h-[60vh]">
+          <div className="flex-1 p-4 sm:p-6 pt-0">
+            <div className="h-[60vh] sm:h-[60vh]">
               {/* TODO: Remplacer par SimpleChat */}
               <div className="p-4 text-center text-gray-500">
-                Fonctionnalité de contact en cours de migration
+                <p className="text-sm sm:text-base">Fonctionnalité de contact en cours de migration</p>
               </div>
             </div>
             
-            <div className="mt-4 flex justify-end space-x-2">
+            <div className="mt-4 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2">
               <Button
                 variant="outline"
                 onClick={() => setIsDialogOpen(false)}
+                className="text-xs sm:text-sm"
               >
                 Fermer
               </Button>
-              <Button onClick={handleNavigateToMessages}>
+              <Button 
+                onClick={handleNavigateToMessages}
+                className="text-xs sm:text-sm"
+              >
                 Ouvrir dans Messages
               </Button>
             </div>
@@ -137,10 +150,11 @@ export const ContactSupplierOptions: React.FC<ContactSupplierOptionsProps> = ({
         supplier={supplier}
         product={product}
         variant="default"
-        className="w-full"
+        className="w-full text-xs sm:text-sm"
       >
-        <MessageCircle className="w-4 h-4 mr-2" />
-        Envoyer un message
+        <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+        <span className="hidden sm:inline">Envoyer un message</span>
+        <span className="sm:hidden">Message</span>
       </ContactSupplierButton>
       
       {supplier.site_web && (

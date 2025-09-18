@@ -24,16 +24,16 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
   };
 
   return (
-    <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'} mb-4 group`}>
-      <div className={`max-w-xs lg:max-w-md relative ${
+    <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'} mb-3 sm:mb-4 group`}>
+      <div className={`max-w-[280px] sm:max-w-xs lg:max-w-md relative ${
         isOwn 
           ? 'order-2' 
           : 'order-1'
       }`}>
         {/* Nom de l'expéditeur */}
         {!isOwn && showSenderName && (
-          <div className="mb-1 ml-2">
-            <span className="text-xs font-medium text-muted-foreground">
+          <div className="mb-1 ml-1 sm:ml-2">
+            <span className="text-xs font-medium text-muted-foreground truncate">
               {senderName}
             </span>
           </div>
@@ -41,7 +41,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
 
         {/* Bulle de message */}
         <div className={`
-          relative px-4 py-3 rounded-2xl shadow-sm transition-all duration-200
+          relative px-3 sm:px-4 py-2 sm:py-3 rounded-2xl shadow-sm transition-all duration-200
           ${isOwn 
             ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-br-md' 
             : 'bg-gradient-to-br from-gray-100 to-gray-200 text-gray-900 rounded-bl-md border border-gray-200'
@@ -49,13 +49,13 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
           group-hover:shadow-md
         `}>
           {/* Contenu du message */}
-          <p className="text-sm leading-relaxed break-words">
+          <p className="text-xs sm:text-sm leading-relaxed break-words">
             {message.contenu}
           </p>
 
           {/* Indicateurs de statut et heure */}
           <div className={`
-            flex items-center justify-end gap-2 mt-2 pt-2
+            flex items-center justify-end gap-1 sm:gap-2 mt-1 sm:mt-2 pt-1 sm:pt-2
             ${isOwn 
               ? 'border-t border-blue-400/30' 
               : 'border-t border-gray-200'
@@ -94,13 +94,14 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
 
         {/* Avatar/Icone */}
         <div className={`
-          w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium
+          w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-white text-xs sm:text-sm font-medium flex-shrink-0
           ${isOwn 
-            ? 'order-1 ml-2 bg-gradient-to-br from-blue-400 to-blue-500' 
-            : 'order-2 mr-2 bg-gradient-to-br from-gray-400 to-gray-500'
+            ? 'order-1 ml-1 sm:ml-2 bg-gradient-to-br from-blue-400 to-blue-500' 
+            : 'order-2 mr-1 sm:mr-2 bg-gradient-to-br from-gray-400 to-gray-500'
           }
         `}>
-          {isOwn ? 'Vous' : senderName.charAt(0).toUpperCase()}
+          <span className="hidden sm:inline">{isOwn ? 'Vous' : senderName.charAt(0).toUpperCase()}</span>
+          <span className="sm:hidden">{isOwn ? 'V' : senderName.charAt(0).toUpperCase()}</span>
         </div>
       </div>
     </div>

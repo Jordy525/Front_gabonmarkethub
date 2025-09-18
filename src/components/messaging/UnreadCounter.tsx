@@ -26,9 +26,9 @@ export const UnreadCounter: React.FC<UnreadCounterProps> = ({
   const displayCount = count > maxCount ? `${maxCount}+` : count.toString();
 
   const sizeClasses = {
-    sm: 'text-xs px-1.5 py-0.5 min-w-[18px] h-5',
-    md: 'text-sm px-2 py-1 min-w-[20px] h-6',
-    lg: 'text-base px-2.5 py-1.5 min-w-[24px] h-7'
+    sm: 'text-xs px-1 sm:px-1.5 py-0.5 min-w-[16px] sm:min-w-[18px] h-4 sm:h-5',
+    md: 'text-xs sm:text-sm px-1.5 sm:px-2 py-0.5 sm:py-1 min-w-[18px] sm:min-w-[20px] h-5 sm:h-6',
+    lg: 'text-sm sm:text-base px-2 sm:px-2.5 py-1 sm:py-1.5 min-w-[20px] sm:min-w-[24px] h-6 sm:h-7'
   };
 
   return (

@@ -80,20 +80,20 @@ const ResponsiveProductCard = ({
   if (currentVariant === 'compact') {
     return (
       <Card className={cn("group hover:shadow-lg transition-all duration-200", className)}>
-        <CardContent className="p-3">
-          <div className="flex gap-3">
-            {/* Image compacte */}
-            <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
+        <CardContent className="p-2 sm:p-3">
+          <div className="flex gap-2 sm:gap-3">
+            {/* Image compacte - PLEIN ÉCRAN sur mobile */}
+            <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex-shrink-0">
               <img
                 src={getImageUrl(mainImage)}
                 alt={product.nom}
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover rounded-md sm:rounded-lg"
               />
             </div>
             
             {/* Contenu compact */}
             <div className="flex-1 min-w-0">
-              <h3 className="font-medium text-sm sm:text-base line-clamp-2 mb-1">
+              <h3 className="font-medium text-xs sm:text-sm md:text-base line-clamp-2 mb-1">
                 {product.nom}
               </h3>
               
@@ -103,14 +103,14 @@ const ResponsiveProductCard = ({
                 </p>
               )}
               
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="font-semibold text-green-600 text-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                <div className="flex items-center space-x-1 sm:space-x-2">
+                  <span className="font-semibold text-green-600 text-xs sm:text-sm">
                     {displayPrice?.toLocaleString()} FCFA
                   </span>
                   {originalPrice && (
                     <span className="text-xs text-gray-500 line-through">
-                      {originalPrice.toLocaleString()} FCFA
+                      {originalPrice.toLocaleString()}
                     </span>
                   )}
                 </div>
@@ -133,7 +133,7 @@ const ResponsiveProductCard = ({
     return (
       <Card className={cn("group hover:shadow-xl transition-all duration-300", className)}>
         <div className="relative">
-          {/* Image principale */}
+          {/* Image principale - PLEIN ÉCRAN */}
           <div className="aspect-square overflow-hidden rounded-t-lg">
             <img
               src={getImageUrl(mainImage)}
@@ -175,7 +175,7 @@ const ResponsiveProductCard = ({
           </div>
         </div>
         
-        <CardContent className="p-4 sm:p-6">
+        <CardContent className="p-3 sm:p-4 lg:p-6">
           {/* Catégorie */}
           {product.categorie && (
             <Badge variant="outline" className="mb-2 text-xs">
@@ -184,7 +184,7 @@ const ResponsiveProductCard = ({
           )}
           
           {/* Titre */}
-          <h3 className="font-semibold text-lg sm:text-xl mb-2 line-clamp-2">
+          <h3 className="font-semibold text-sm sm:text-base lg:text-lg mb-2 line-clamp-2">
             {product.nom}
           </h3>
           
@@ -250,23 +250,25 @@ const ResponsiveProductCard = ({
           </div>
         </CardContent>
         
-        <CardFooter className="p-4 sm:p-6 pt-0">
-          <div className="flex gap-2 w-full">
+        <CardFooter className="p-3 sm:p-4 lg:p-6 pt-0">
+          <div className="flex flex-col sm:flex-row gap-2 w-full">
             <Button
               variant="outline"
-              className="flex-1"
+              className="flex-1 text-xs sm:text-sm"
               onClick={() => onView?.(product.id)}
             >
-              <Eye className="w-4 h-4 mr-2" />
-              Voir
+              <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Voir</span>
+              <span className="sm:hidden">👁</span>
             </Button>
             <Button
-              className="flex-1"
+              className="flex-1 text-xs sm:text-sm"
               onClick={() => onAddToCart?.(product.id)}
               disabled={!isInStock}
             >
-              <ShoppingCart className="w-4 h-4 mr-2" />
-              {isInStock ? 'Ajouter' : 'Indisponible'}
+              <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">{isInStock ? 'Ajouter' : 'Indisponible'}</span>
+              <span className="sm:hidden">{isInStock ? '🛒' : '❌'}</span>
             </Button>
           </div>
         </CardFooter>
@@ -347,14 +349,15 @@ const ResponsiveProductCard = ({
         </div>
       </CardContent>
       
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-3 sm:p-4 pt-0">
         <Button
-          className="w-full"
+          className="w-full text-xs sm:text-sm"
           onClick={() => onAddToCart?.(product.id)}
           disabled={!isInStock}
         >
-          <ShoppingCart className="w-4 h-4 mr-2" />
-          {isInStock ? 'Ajouter au panier' : 'Indisponible'}
+          <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+          <span className="hidden sm:inline">{isInStock ? 'Ajouter au panier' : 'Indisponible'}</span>
+          <span className="sm:hidden">{isInStock ? '🛒 Ajouter' : '❌'}</span>
         </Button>
       </CardFooter>
     </Card>

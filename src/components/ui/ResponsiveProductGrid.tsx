@@ -26,14 +26,14 @@ const ResponsiveProductGrid = ({
 }: ResponsiveProductGridProps) => {
   const breakpoint = useBreakpoint();
   
-  // Configuration des colonnes par défaut
+  // Configuration des colonnes par défaut - OPTIMISÉ MOBILE
   const defaultColumns = {
     xs: 1,
     sm: 2,
     md: 2,
     lg: 3,
     xl: 4,
-    '2xl': 5
+    '2xl': 4
   };
   
   const finalColumns = { ...defaultColumns, ...columns };
@@ -42,11 +42,11 @@ const ResponsiveProductGrid = ({
   const getGridClasses = () => {
     const classes = ['grid'];
     
-    // Gap
+    // Gap - RÉDUIT pour mobile
     const gapClasses = {
-      sm: 'gap-2 sm:gap-3',
-      md: 'gap-4 sm:gap-6',
-      lg: 'gap-6 sm:gap-8'
+      sm: 'gap-1 sm:gap-2',
+      md: 'gap-2 sm:gap-3 lg:gap-4',
+      lg: 'gap-3 sm:gap-4 lg:gap-6'
     };
     classes.push(gapClasses[gap]);
     
@@ -61,20 +61,26 @@ const ResponsiveProductGrid = ({
     return classes.join(' ');
   };
   
-  // Variantes spéciales
+  // Variantes spéciales - OPTIMISÉ MOBILE
   const getVariantClasses = () => {
     switch (variant) {
       case 'masonry':
-        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+        return 'columns-1 sm:columns-2 lg:columns-3 xl:columns-4 space-y-2 sm:space-y-4';
       case 'fixed':
-        return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
+        return 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4';
       default:
         return getGridClasses();
     }
   };
   
   return (
-    <div className={cn(getVariantClasses(), className)}>
+    <div className={cn(
+      getVariantClasses(),
+      // Optimisations pour mobile
+      'w-full',
+      variant === 'auto' && 'auto-rows-min',
+      className
+    )}>
       {children}
     </div>
   );

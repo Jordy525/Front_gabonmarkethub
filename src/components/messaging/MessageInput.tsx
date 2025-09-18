@@ -293,23 +293,23 @@ export const MessageInput: React.FC<MessageInputProps> = ({
       <div className={`border-t bg-white ${className}`}>
         {/* Error Alert */}
         {(sendError || hasErrors) && (
-          <div className="p-3 border-b bg-red-50">
+          <div className="p-2 sm:p-3 border-b bg-red-50">
             <Alert variant="destructive">
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription className="flex items-center justify-between">
-                <span>
+              <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4" />
+              <AlertDescription className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                <span className="text-xs sm:text-sm">
                   {sendError || `${optimisticMessages.errorCount} message(s) en erreur`}
                 </span>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1 sm:space-x-2">
                   {hasErrors && (
                     <Button
                       size="sm"
                       variant="outline"
                       onClick={() => optimisticMessages.clearErrors()}
-                      className="h-6 text-xs"
+                      className="h-5 sm:h-6 text-xs px-2"
                     >
                       <Trash2 className="w-3 h-3 mr-1" />
-                      Supprimer
+                      <span className="hidden sm:inline">Supprimer</span>
                     </Button>
                   )}
                   {sendError && (
@@ -317,7 +317,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
                       size="sm"
                       variant="outline"
                       onClick={() => setSendError(null)}
-                      className="h-6 text-xs"
+                      className="h-5 sm:h-6 text-xs px-2"
                     >
                       <X className="w-3 h-3" />
                     </Button>
@@ -331,7 +331,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
         {/* Sending Status */}
         {isSending && (
           <div className="p-2 border-b bg-blue-50">
-            <div className="flex items-center space-x-2 text-sm text-blue-700">
+            <div className="flex items-center space-x-2 text-xs sm:text-sm text-blue-700">
               <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-700"></div>
               <span>Envoi de {optimisticMessages.sendingCount} message(s)...</span>
             </div>
@@ -339,16 +339,16 @@ export const MessageInput: React.FC<MessageInputProps> = ({
         )}
         {/* Zone de fichiers sélectionnés */}
         {selectedFiles.length > 0 && (
-          <div className="p-3 border-b bg-gray-50">
-            <div className="flex flex-wrap gap-2">
+          <div className="p-2 sm:p-3 border-b bg-gray-50">
+            <div className="flex flex-wrap gap-1 sm:gap-2">
               {selectedFiles.map((file, index) => (
                 <div
                   key={index}
-                  className="flex items-center space-x-2 bg-white rounded-lg p-2 border"
+                  className="flex items-center space-x-1 sm:space-x-2 bg-white rounded-lg p-1 sm:p-2 border"
                 >
                   {getFileIcon(file)}
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-medium truncate">
+                    <div className="text-xs sm:text-sm font-medium truncate">
                       {file.name}
                     </div>
                     <div className="text-xs text-gray-500">
@@ -359,7 +359,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
                     size="sm"
                     variant="ghost"
                     onClick={() => removeSelectedFile(index)}
-                    className="p-1 h-auto"
+                    className="p-0.5 sm:p-1 h-auto"
                   >
                     <X className="w-3 h-3" />
                   </Button>
@@ -396,7 +396,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
 
         {/* Zone de saisie principale */}
         <div 
-          className={`p-4 ${dragOver ? 'bg-blue-50 border-blue-200' : ''}`}
+          className={`p-2 sm:p-4 ${dragOver ? 'bg-blue-50 border-blue-200' : ''}`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
@@ -410,9 +410,9 @@ export const MessageInput: React.FC<MessageInputProps> = ({
             </div>
           )}
 
-          <div className="flex items-end space-x-2">
+          <div className="flex items-end space-x-1 sm:space-x-2">
             {/* Boutons d'actions à gauche */}
-            <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-0.5 sm:space-x-1">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
@@ -420,9 +420,9 @@ export const MessageInput: React.FC<MessageInputProps> = ({
                     variant="ghost"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={disabled}
-                    className="p-2"
+                    className="p-1 sm:p-2"
                   >
-                    <Paperclip className="w-4 h-4" />
+                    <Paperclip className="w-3 h-3 sm:w-4 sm:h-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>Joindre un fichier</TooltipContent>
@@ -440,9 +440,9 @@ export const MessageInput: React.FC<MessageInputProps> = ({
                       }
                     }}
                     disabled={disabled}
-                    className="p-2"
+                    className="p-1 sm:p-2"
                   >
-                    <ImageIcon className="w-4 h-4" />
+                    <ImageIcon className="w-3 h-3 sm:w-4 sm:h-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>Joindre une image</TooltipContent>
@@ -459,14 +459,14 @@ export const MessageInput: React.FC<MessageInputProps> = ({
                 placeholder={placeholder}
                 disabled={disabled || isSending}
                 className={`
-                  min-h-[40px] max-h-[120px] resize-none pr-16
+                  min-h-[36px] sm:min-h-[40px] max-h-[100px] sm:max-h-[120px] resize-none pr-12 sm:pr-16 text-sm sm:text-base
                   ${isOverLimit ? 'border-red-300 focus:border-red-500' : ''}
                 `}
                 rows={1}
               />
               
               {/* Compteur de caractères */}
-              <div className="absolute bottom-2 right-2 text-xs text-gray-400">
+              <div className="absolute bottom-1 sm:bottom-2 right-1 sm:right-2 text-xs text-gray-400">
                 <span className={isOverLimit ? 'text-red-500' : ''}>
                   {characterCount}
                 </span>
@@ -481,12 +481,12 @@ export const MessageInput: React.FC<MessageInputProps> = ({
                   onClick={handleSendMessage}
                   disabled={!canSend || isOverLimit}
                   size="sm"
-                  className="p-2 min-w-[40px]"
+                  className="p-1.5 sm:p-2 min-w-[32px] sm:min-w-[40px]"
                 >
                   {isSending || isUploading ? (
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    <div className="animate-spin rounded-full h-3 w-3 sm:h-4 sm:w-4 border-b-2 border-white"></div>
                   ) : (
-                    <Send className="w-4 h-4" />
+                    <Send className="w-3 h-3 sm:w-4 sm:h-4" />
                   )}
                 </Button>
               </TooltipTrigger>
@@ -512,7 +512,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
 
         {/* Indicateur de frappe */}
         {isTyping && (
-          <div className="px-4 py-2 text-xs text-gray-500 bg-gray-50 border-t">
+          <div className="px-2 sm:px-4 py-1 sm:py-2 text-xs text-gray-500 bg-gray-50 border-t">
             Vous êtes en train d'écrire...
           </div>
         )}
