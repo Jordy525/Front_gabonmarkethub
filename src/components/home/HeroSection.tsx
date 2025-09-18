@@ -69,12 +69,12 @@ const HeroSection = () => {
       <div className={`relative ${RESPONSIVE_CLASSES.container} py-12 sm:py-16 lg:py-20 xl:py-32`}>
         <div className="max-w-4xl mx-auto text-center">
           {/* Main heading */}
-          <h1 className={`${RESPONSIVE_CLASSES.text.h1} font-bold mb-6 opacity-0 animate-[fadeIn_0.5s_ease-in-out_forwards]`}>
+          <h1 className={`${RESPONSIVE_CLASSES.text?.h1 || 'text-2xl sm:text-3xl lg:text-4xl xl:text-5xl'} font-bold mb-6 opacity-0 animate-[fadeIn_0.5s_ease-in-out_forwards]`}>
             Connecter l'<span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Italie</span> et le
             <span className="bg-gradient-to-r from-yellow-400 to-yellow-500 bg-clip-text text-transparent">Gabon</span>
           </h1>
 
-          <p className={`${RESPONSIVE_CLASSES.text.large} mb-8 text-white/90 opacity-0 animate-[slideUp_0.3s_ease-out_0.2s_forwards]`}>
+          <p className={`${RESPONSIVE_CLASSES.text?.large || 'text-base sm:text-lg lg:text-xl'} mb-8 text-white/90 opacity-0 animate-[slideUp_0.3s_ease-out_0.2s_forwards]`}>
             Plateforme dédiée aux échanges commerciaux entre entreprises italiennes et artisans gabonais.
             Découvrez des produits authentiques, négociez directement et développez vos partenariats.
           </p>

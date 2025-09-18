@@ -26,8 +26,8 @@ const FeaturedProducts = () => {
 
   if (isLoading) {
     return (
-      <section className={`${RESPONSIVE_CLASSES.spacing.sectionLarge} bg-white`}>
-        <div className={RESPONSIVE_CLASSES.container}>
+      <section className={`${RESPONSIVE_CLASSES.spacing?.sectionLarge || 'py-12 sm:py-16 lg:py-20'} bg-white`}>
+        <div className={RESPONSIVE_CLASSES.container || 'w-full mx-auto px-4 sm:px-6 lg:px-8'}>
           <div className="flex justify-center items-center h-64">
             <Loader2 className="w-8 h-8 animate-spin text-green-600" />
             <span className="ml-2 text-gray-600">Chargement des produits...</span>
@@ -39,8 +39,8 @@ const FeaturedProducts = () => {
 
   if (error) {
     return (
-      <section className={`${RESPONSIVE_CLASSES.spacing.sectionLarge} bg-white`}>
-        <div className={RESPONSIVE_CLASSES.container}>
+      <section className={`${RESPONSIVE_CLASSES.spacing?.sectionLarge || 'py-12 sm:py-16 lg:py-20'} bg-white`}>
+        <div className={RESPONSIVE_CLASSES.container || 'w-full mx-auto px-4 sm:px-6 lg:px-8'}>
           <div className="text-center">
             <p className="text-red-600">Erreur lors du chargement des produits</p>
             <Button variant="outline" onClick={() => window.location.reload()}>
@@ -54,8 +54,8 @@ const FeaturedProducts = () => {
 
   if (!featuredProducts || featuredProducts.length === 0) {
     return (
-      <section className={`${RESPONSIVE_CLASSES.spacing.sectionLarge} bg-white`}>
-        <div className={RESPONSIVE_CLASSES.container}>
+      <section className={`${RESPONSIVE_CLASSES.spacing?.sectionLarge || 'py-12 sm:py-16 lg:py-20'} bg-white`}>
+        <div className={RESPONSIVE_CLASSES.container || 'w-full mx-auto px-4 sm:px-6 lg:px-8'}>
           <div className="text-center">
             <p className="text-gray-600">Aucun produit vedette disponible</p>
           </div>
@@ -64,14 +64,14 @@ const FeaturedProducts = () => {
     );
   }
   return (
-    <section className={`${RESPONSIVE_CLASSES.spacing.sectionLarge} bg-white`}>
-      <div className={RESPONSIVE_CLASSES.container}>
+    <section className={`${RESPONSIVE_CLASSES.spacing?.sectionLarge || 'py-12 sm:py-16 lg:py-20'} bg-white`}>
+      <div className={RESPONSIVE_CLASSES.container || 'w-full mx-auto px-4 sm:px-6 lg:px-8'}>
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className={`${RESPONSIVE_CLASSES.text.h2} font-bold text-gray-900 mb-4`}>
+          <h2 className={`${RESPONSIVE_CLASSES.text?.h2 || 'text-xl sm:text-2xl lg:text-3xl xl:text-4xl'} font-bold text-gray-900 mb-4`}>
             Produits vedettes
           </h2>
-          <p className={`${RESPONSIVE_CLASSES.text.body} text-gray-600 max-w-2xl mx-auto`}>
+          <p className={`${RESPONSIVE_CLASSES.text?.body || 'text-sm sm:text-base lg:text-lg'} text-gray-600 max-w-2xl mx-auto`}>
             Découvrez notre sélection de produits populaires avec les meilleurs fournisseurs vérifiés.
             Prix compétitifs et qualité garantie.
           </p>

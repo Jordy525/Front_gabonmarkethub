@@ -116,25 +116,25 @@ const ResponsiveTest = () => {
             <CardTitle>Test des Textes Responsives</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <h1 className={RESPONSIVE_CLASSES.text.h1}>
+            <h1 className={RESPONSIVE_CLASSES.text?.h1 || 'text-2xl sm:text-3xl lg:text-4xl xl:text-5xl'}>
               Titre H1 Responsive
             </h1>
-            <h2 className={RESPONSIVE_CLASSES.text.h2}>
+            <h2 className={RESPONSIVE_CLASSES.text?.h2 || 'text-xl sm:text-2xl lg:text-3xl xl:text-4xl'}>
               Titre H2 Responsive
             </h2>
-            <h3 className={RESPONSIVE_CLASSES.text.h3}>
+            <h3 className={RESPONSIVE_CLASSES.text?.h3 || 'text-lg sm:text-xl lg:text-2xl xl:text-3xl'}>
               Titre H3 Responsive
             </h3>
-            <h4 className={RESPONSIVE_CLASSES.text.h4}>
+            <h4 className={RESPONSIVE_CLASSES.text?.h4 || 'text-base sm:text-lg lg:text-xl xl:text-2xl'}>
               Titre H4 Responsive
             </h4>
-            <p className={RESPONSIVE_CLASSES.text.body}>
+            <p className={RESPONSIVE_CLASSES.text?.body || 'text-sm sm:text-base lg:text-lg'}>
               Ceci est un paragraphe avec du texte responsive qui s'adapte à la taille de l'écran.
             </p>
-            <p className={RESPONSIVE_CLASSES.text.small}>
+            <p className={RESPONSIVE_CLASSES.text?.small || 'text-xs sm:text-sm'}>
               Texte petit responsive
             </p>
-            <p className={RESPONSIVE_CLASSES.text.large}>
+            <p className={RESPONSIVE_CLASSES.text?.large || 'text-base sm:text-lg lg:text-xl'}>
               Texte large responsive
             </p>
           </CardContent>
@@ -147,22 +147,22 @@ const ResponsiveTest = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex flex-wrap gap-4">
-              <Button className={RESPONSIVE_CLASSES.button.small}>
+              <Button className={RESPONSIVE_CLASSES.button?.small || 'px-3 py-2 text-sm'}>
                 Petit
               </Button>
-              <Button className={RESPONSIVE_CLASSES.button.medium}>
+              <Button className={RESPONSIVE_CLASSES.button?.medium || 'px-4 py-2 text-base'}>
                 Moyen
               </Button>
-              <Button className={RESPONSIVE_CLASSES.button.large}>
+              <Button className={RESPONSIVE_CLASSES.button?.large || 'px-6 py-3 text-lg'}>
                 Grand
               </Button>
             </div>
             
             <div className="flex flex-wrap gap-4">
-              <Button variant="outline" className={RESPONSIVE_CLASSES.button.primary}>
+              <Button variant="outline" className={RESPONSIVE_CLASSES.button?.primary || 'w-full sm:w-auto'}>
                 Primary
               </Button>
-              <Button variant="secondary" className={RESPONSIVE_CLASSES.button.secondary}>
+              <Button variant="secondary" className={RESPONSIVE_CLASSES.button?.secondary || 'w-full sm:w-auto'}>
                 Secondary
               </Button>
             </div>
@@ -175,9 +175,9 @@ const ResponsiveTest = () => {
             <CardTitle>Test des Cartes Responsives</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className={RESPONSIVE_CLASSES.cardGrid}>
+            <div className={RESPONSIVE_CLASSES.cardGrid || 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6'}>
               {[1, 2, 3, 4, 5, 6].map(i => (
-                <Card key={i} className={RESPONSIVE_CLASSES.card}>
+                <Card key={i} className={RESPONSIVE_CLASSES.card || 'w-full max-w-sm sm:max-w-md lg:max-w-lg'}>
                   <CardHeader>
                     <CardTitle>Carte {i}</CardTitle>
                   </CardHeader>
@@ -196,13 +196,13 @@ const ResponsiveTest = () => {
             <CardTitle>Test des Formulaires Responsives</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className={RESPONSIVE_CLASSES.form.container}>
+            <div className={RESPONSIVE_CLASSES.form?.container || 'w-full max-w-md sm:max-w-lg lg:max-w-xl mx-auto p-4 sm:p-6 lg:p-8'}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Nom</label>
                   <input 
                     type="text" 
-                    className={RESPONSIVE_CLASSES.form.input}
+                    className={RESPONSIVE_CLASSES.form?.input || 'w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base'}
                     placeholder="Votre nom"
                   />
                 </div>
@@ -210,24 +210,24 @@ const ResponsiveTest = () => {
                   <label className="block text-sm font-medium mb-2">Email</label>
                   <input 
                     type="email" 
-                    className={RESPONSIVE_CLASSES.form.input}
+                    className={RESPONSIVE_CLASSES.form?.input || 'w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base'}
                     placeholder="votre@email.com"
                   />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-sm font-medium mb-2">Message</label>
                   <textarea 
-                    className={RESPONSIVE_CLASSES.form.input}
+                    className={RESPONSIVE_CLASSES.form?.input || 'w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base'}
                     rows={4}
                     placeholder="Votre message"
                   />
                 </div>
               </div>
               <div className="flex gap-4 mt-6">
-                <Button className={RESPONSIVE_CLASSES.form.button}>
+                <Button className={RESPONSIVE_CLASSES.form?.button || 'w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base'}>
                   Envoyer
                 </Button>
-                <Button variant="outline" className={RESPONSIVE_CLASSES.form.button}>
+                <Button variant="outline" className={RESPONSIVE_CLASSES.form?.button || 'w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base'}>
                   Annuler
                 </Button>
               </div>
@@ -241,9 +241,9 @@ const ResponsiveTest = () => {
             <CardTitle>Test des Tables Responsives</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className={RESPONSIVE_CLASSES.table.container}>
-              <table className={RESPONSIVE_CLASSES.table.table}>
-                <thead className={RESPONSIVE_CLASSES.table?.header || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium'}>
+            <div className={RESPONSIVE_CLASSES.table?.container || 'overflow-x-auto'}>
+              <table className={RESPONSIVE_CLASSES.table?.table || 'min-w-full divide-y divide-gray-200'}>
+                <thead>
                   <tr>
                     <th className={RESPONSIVE_CLASSES.table?.header || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium'}>Nom</th>
                     <th className={RESPONSIVE_CLASSES.table?.header || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium'}>Email</th>
@@ -254,12 +254,12 @@ const ResponsiveTest = () => {
                 <tbody>
                   {[1, 2, 3, 4, 5].map(i => (
                     <tr key={i}>
-                      <td className={RESPONSIVE_CLASSES.table.cell}>Utilisateur {i}</td>
-                      <td className={RESPONSIVE_CLASSES.table.cell}>user{i}@example.com</td>
-                      <td className={RESPONSIVE_CLASSES.table.cell}>
+                      <td className={RESPONSIVE_CLASSES.table?.cell || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm'}>Utilisateur {i}</td>
+                      <td className={RESPONSIVE_CLASSES.table?.cell || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm'}>user{i}@example.com</td>
+                      <td className={RESPONSIVE_CLASSES.table?.cell || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm'}>
                         <Badge variant="secondary">Utilisateur</Badge>
                       </td>
-                      <td className={RESPONSIVE_CLASSES.table.cell}>
+                      <td className={RESPONSIVE_CLASSES.table?.cell || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm'}>
                         <Button size="sm" variant="outline">
                           <Eye className="w-4 h-4" />
                         </Button>

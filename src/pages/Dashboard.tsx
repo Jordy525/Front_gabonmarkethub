@@ -73,7 +73,7 @@ const Dashboard = () => {
   return (
     <ResponsiveLayout>
       <div className="min-h-screen bg-gray-50">
-        <div className={RESPONSIVE_CLASSES.container}>
+        <div className={RESPONSIVE_CLASSES.container || 'w-full mx-auto px-4 sm:px-6 lg:px-8'}>
           {/* Header avec barre de recherche */}
           <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6 mb-6">
             <div className="flex flex-col lg:flex-row lg:items-center gap-4">

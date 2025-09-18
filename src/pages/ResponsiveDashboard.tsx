@@ -91,7 +91,7 @@ const ResponsiveDashboard = () => {
   return (
     <ResponsiveLayout>
       <div className="min-h-screen bg-gray-50">
-        <div className={RESPONSIVE_CLASSES.container}>
+        <div className={RESPONSIVE_CLASSES.container || 'w-full mx-auto px-4 sm:px-6 lg:px-8'}>
           {/* Header */}
           <div className="py-6 sm:py-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

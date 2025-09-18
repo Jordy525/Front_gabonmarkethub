@@ -59,12 +59,12 @@ const ResponsiveFooter = () => {
   return (
     <footer className="bg-gray-900 text-white">
       {/* Main footer content */}
-      <div className={RESPONSIVE_CLASSES.container}>
-        <div className={`${RESPONSIVE_CLASSES.footer.grid} ${RESPONSIVE_CLASSES.footer.container}`}>
+      <div className={RESPONSIVE_CLASSES.container || 'w-full mx-auto px-4 sm:px-6 lg:px-8'}>
+        <div className={`${RESPONSIVE_CLASSES.footer?.grid || 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'} ${RESPONSIVE_CLASSES.footer?.container || 'py-8 sm:py-12 lg:py-16'}`}>
           {/* Company info */}
           <div className="space-y-4 sm:space-y-6">
             <Logo size="lg" className="text-white" />
-            <p className={`${RESPONSIVE_CLASSES.footer.text} text-gray-300 leading-relaxed`}>
+            <p className={`${RESPONSIVE_CLASSES.footer?.text || 'text-sm sm:text-base'} text-gray-300 leading-relaxed`}>
               GabMarketHub est la première plateforme B2B du Gabon, connectant les acheteurs 
               et fournisseurs pour faciliter le commerce local et régional.
             </p>
@@ -95,7 +95,7 @@ const ResponsiveFooter = () => {
                   <li key={linkIndex}>
                     <a
                       href={link.href}
-                      className={`${RESPONSIVE_CLASSES.footer.text} text-gray-300 hover:text-white transition-colors`}
+                      className={`${RESPONSIVE_CLASSES.footer?.text || 'text-sm sm:text-base'} text-gray-300 hover:text-white transition-colors`}
                     >
                       {link.label}
                     </a>
@@ -112,7 +112,7 @@ const ResponsiveFooter = () => {
             <h3 className="text-xl sm:text-2xl font-semibold mb-2">
               Restez informé
             </h3>
-            <p className={`${RESPONSIVE_CLASSES.footer.text} text-gray-300 mb-6`}>
+            <p className={`${RESPONSIVE_CLASSES.footer?.text || 'text-sm sm:text-base'} text-gray-300 mb-6`}>
               Recevez nos dernières actualités et offres spéciales
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
@@ -133,7 +133,7 @@ const ResponsiveFooter = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             {/* Copyright */}
             <div className="text-center sm:text-left">
-              <p className={`${RESPONSIVE_CLASSES.footer.text} text-gray-400`}>
+              <p className={`${RESPONSIVE_CLASSES.footer?.text || 'text-sm sm:text-base'} text-gray-400`}>
                 © {currentYear} GabMarketHub. Tous droits réservés.
               </p>
             </div>

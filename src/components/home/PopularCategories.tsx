@@ -286,14 +286,14 @@ const PopularCategories = () => {
   };
 
   return (
-    <section className={`${RESPONSIVE_CLASSES.spacing.section} bg-white`}>
-      <div className={RESPONSIVE_CLASSES.container}>
+    <section className={`${RESPONSIVE_CLASSES.spacing?.section || 'py-8 sm:py-12 lg:py-16'} bg-white`}>
+      <div className={RESPONSIVE_CLASSES.container || 'w-full mx-auto px-4 sm:px-6 lg:px-8'}>
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className={`${RESPONSIVE_CLASSES.text.h2} font-bold text-gray-900 mb-4`}>
+          <h2 className={`${RESPONSIVE_CLASSES.text?.h2 || 'text-xl sm:text-2xl lg:text-3xl xl:text-4xl'} font-bold text-gray-900 mb-4`}>
             Catégories Populaires
           </h2>
-          <p className={`${RESPONSIVE_CLASSES.text.body} text-gray-600 max-w-2xl mx-auto`}>
+          <p className={`${RESPONSIVE_CLASSES.text?.body || 'text-sm sm:text-base lg:text-lg'} text-gray-600 max-w-2xl mx-auto`}>
             Explorez nos catégories les plus demandées par les professionnels gabonais
           </p>
         </div>
