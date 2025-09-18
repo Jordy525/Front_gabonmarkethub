@@ -16,6 +16,12 @@ import {
 const ResponsiveTest = () => {
   const breakpoint = useBreakpoint();
   
+  // Vérification de sécurité pour RESPONSIVE_CLASSES
+  if (!RESPONSIVE_CLASSES) {
+    console.error('RESPONSIVE_CLASSES is undefined');
+    return <div>Erreur de configuration responsive</div>;
+  }
+  
   const breakpointInfo = {
     xs: { label: 'Mobile Portrait', icon: Smartphone, color: 'bg-red-500' },
     sm: { label: 'Mobile Landscape', icon: Smartphone, color: 'bg-orange-500' },
@@ -57,7 +63,7 @@ const ResponsiveTest = () => {
             {/* Grille 1 colonne */}
             <div>
               <h3 className="text-lg font-semibold mb-2">Grille 1 colonne</h3>
-              <div className={RESPONSIVE_CLASSES.grid1}>
+              <div className={RESPONSIVE_CLASSES?.grid1 || 'grid grid-cols-1'}>
                 {[1, 2, 3].map(i => (
                   <div key={i} className="bg-blue-200 p-4 rounded text-center">
                     Item {i}
@@ -69,7 +75,7 @@ const ResponsiveTest = () => {
             {/* Grille 2 colonnes */}
             <div>
               <h3 className="text-lg font-semibold mb-2">Grille 2 colonnes</h3>
-              <div className={RESPONSIVE_CLASSES.grid2}>
+              <div className={RESPONSIVE_CLASSES?.grid2 || 'grid grid-cols-1 sm:grid-cols-2'}>
                 {[1, 2, 3, 4].map(i => (
                   <div key={i} className="bg-green-200 p-4 rounded text-center">
                     Item {i}
@@ -81,7 +87,7 @@ const ResponsiveTest = () => {
             {/* Grille 3 colonnes */}
             <div>
               <h3 className="text-lg font-semibold mb-2">Grille 3 colonnes</h3>
-              <div className={RESPONSIVE_CLASSES.grid3}>
+              <div className={RESPONSIVE_CLASSES?.grid3 || 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}>
                 {[1, 2, 3, 4, 5, 6].map(i => (
                   <div key={i} className="bg-purple-200 p-4 rounded text-center">
                     Item {i}
@@ -93,7 +99,7 @@ const ResponsiveTest = () => {
             {/* Grille 4 colonnes */}
             <div>
               <h3 className="text-lg font-semibold mb-2">Grille 4 colonnes</h3>
-              <div className={RESPONSIVE_CLASSES.grid4}>
+              <div className={RESPONSIVE_CLASSES?.grid4 || 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'}>
                 {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
                   <div key={i} className="bg-pink-200 p-4 rounded text-center">
                     Item {i}
@@ -237,12 +243,12 @@ const ResponsiveTest = () => {
           <CardContent>
             <div className={RESPONSIVE_CLASSES.table.container}>
               <table className={RESPONSIVE_CLASSES.table.table}>
-                <thead className={RESPONSIVE_CLASSES.table.header}>
+                <thead className={RESPONSIVE_CLASSES.table?.header || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium'}>
                   <tr>
-                    <th className={RESPONSIVE_CLASSES.table.header}>Nom</th>
-                    <th className={RESPONSIVE_CLASSES.table.header}>Email</th>
-                    <th className={RESPONSIVE_CLASSES.table.header}>Rôle</th>
-                    <th className={RESPONSIVE_CLASSES.table.header}>Actions</th>
+                    <th className={RESPONSIVE_CLASSES.table?.header || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium'}>Nom</th>
+                    <th className={RESPONSIVE_CLASSES.table?.header || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium'}>Email</th>
+                    <th className={RESPONSIVE_CLASSES.table?.header || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium'}>Rôle</th>
+                    <th className={RESPONSIVE_CLASSES.table?.header || 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium'}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -72,7 +72,9 @@ export const RESPONSIVE_CLASSES = {
     field: 'w-full',
     fieldHalf: 'w-full sm:w-1/2',
     fieldThird: 'w-full sm:w-1/3',
-    fieldTwoThird: 'w-full sm:w-2/3'
+    fieldTwoThird: 'w-full sm:w-2/3',
+    input: 'w-full px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base',
+    button: 'w-full sm:w-auto px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base'
   },
   
   // Navigation
@@ -93,7 +95,8 @@ export const RESPONSIVE_CLASSES = {
   table: {
     container: 'overflow-x-auto',
     table: 'min-w-full divide-y divide-gray-200',
-    cell: 'px-3 py-2 sm:px-6 sm:py-4 text-sm'
+    header: 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm font-medium',
+    cell: 'px-3 py-2 sm:px-6 sm:py-4 text-xs sm:text-sm'
   },
   
   // Modals
@@ -188,4 +191,5 @@ export const COMPONENT_CONFIGS = {
   }
 } as const;
 
+export { RESPONSIVE_CLASSES };
 export default RESPONSIVE_CLASSES;
