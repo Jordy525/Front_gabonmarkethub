@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Search, Menu, User, Globe, MessageCircle, LogOut, X, ChevronDown } from "lucide-react";
+import { Search, Menu, User, Globe, MessageCircle, LogOut, X, ChevronDown, Heart, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -15,6 +15,7 @@ import { useProfilePhoto } from "@/hooks/useProfilePhoto";
 import { ProfileAvatar } from "@/components/ui/ProfileAvatar";
 import { UserNotificationBell } from "@/components/notifications/UserNotificationBell";
 import Logo from "@/components/ui/Logo";
+import MobileNavigation from "@/components/navigation/MobileNavigation";
 import { RESPONSIVE_CLASSES, useBreakpoint } from "@/config/responsive";
 
 import { toast } from "sonner";
@@ -71,18 +72,6 @@ const ResponsiveHeader = () => {
     }
   };
 
-  const navigationItems = [
-    { label: 'Accueil', path: '/', icon: null },
-    { label: 'Produits', path: '/products', icon: null },
-    { label: 'Recherche', path: '/search', icon: Search },
-    { label: 'Catégories', path: '/categories', icon: null },
-    { label: 'Fournisseurs', path: '/suppliers', icon: null },
-  ];
-
-  const userMenuItems = [
-    { label: 'Tableau de bord', path: '/dashboard', icon: User },
-    { label: 'Mon profil', path: '/profile', icon: User },
-  ];
 
   return (
     <header className={`bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50 transition-all duration-200 ${
@@ -109,15 +98,30 @@ const ResponsiveHeader = () => {
 
           {/* Navigation Desktop */}
           <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-            {navigationItems.map((item) => (
-              <button
-                key={item.path}
-                onClick={() => navigate(item.path)}
-                className="text-gray-900 hover:text-green-600 transition-colors font-medium text-sm xl:text-base"
-              >
-                {item.label}
-              </button>
-            ))}
+            <button
+              onClick={() => navigate('/')}
+              className="text-gray-900 hover:text-green-600 transition-colors font-medium text-sm xl:text-base"
+            >
+              Accueil
+            </button>
+            <button
+              onClick={() => navigate('/products')}
+              className="text-gray-900 hover:text-green-600 transition-colors font-medium text-sm xl:text-base"
+            >
+              Produits
+            </button>
+            <button
+              onClick={() => navigate('/search')}
+              className="text-gray-900 hover:text-green-600 transition-colors font-medium text-sm xl:text-base"
+            >
+              Recherche
+            </button>
+            <button
+              onClick={() => navigate('/suppliers')}
+              className="text-gray-900 hover:text-green-600 transition-colors font-medium text-sm xl:text-base"
+            >
+              Fournisseurs
+            </button>
           </nav>
 
           {/* Actions Desktop */}
@@ -159,12 +163,22 @@ const ResponsiveHeader = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
-                  {userMenuItems.map((item) => (
-                    <DropdownMenuItem key={item.path} onClick={() => navigate(item.path)}>
-                      <item.icon className="w-4 h-4 mr-2" />
-                      {item.label}
-                    </DropdownMenuItem>
-                  ))}
+                  <DropdownMenuItem onClick={() => navigate('/dashboard')}>
+                    <User className="w-4 h-4 mr-2" />
+                    Tableau de bord
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate('/profile')}>
+                    <User className="w-4 h-4 mr-2" />
+                    Mon profil
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate('/favorites')}>
+                    <Heart className="w-4 h-4 mr-2" />
+                    Favoris
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate('/settings')}>
+                    <Settings className="w-4 h-4 mr-2" />
+                    Paramètres
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleLogout}
@@ -253,108 +267,11 @@ const ResponsiveHeader = () => {
           </div>
         )}
 
-        {/* Menu Mobile */}
-        {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-200">
-            <nav className="flex flex-col space-y-1">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.path}
-                  onClick={() => {
-                    navigate(item.path);
-                    setIsMenuOpen(false);
-                  }}
-                  className="flex items-center px-3 py-3 text-gray-900 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors text-left w-full font-medium"
-                >
-                  {item.icon && <item.icon className="w-4 h-4 mr-3" />}
-                  {item.label}
-                </button>
-              ))}
-              
-              {isAuthenticated && (
-                <button
-                  onClick={() => {
-                    navigate('/messages');
-                    setIsMenuOpen(false);
-                  }}
-                  className="flex items-center px-3 py-3 text-gray-900 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors text-left w-full"
-                >
-                  <MessageCircle className="w-4 h-4 mr-3" />
-                  Messages
-                </button>
-              )}
-            </nav>
-
-            {/* User section mobile */}
-            <div className="pt-4 mt-4 border-t border-gray-200">
-              {isAuthenticated ? (
-                <div className="space-y-2">
-                  <div className="flex items-center px-3 py-2">
-                    <ProfileAvatar
-                      photoUrl={photoData?.photo_profil}
-                      name={`${(currentUser as any)?.nom} ${(currentUser as any)?.prenom}`}
-                      size="sm"
-                    />
-                    <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-900">
-                        {(currentUser as any)?.nom} {(currentUser as any)?.prenom}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {(currentUser as any)?.email}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {userMenuItems.map((item) => (
-                    <button
-                      key={item.path}
-                      onClick={() => {
-                        navigate(item.path);
-                        setIsMenuOpen(false);
-                      }}
-                      className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-lg transition-colors"
-                    >
-                      <item.icon className="w-4 h-4 mr-3" />
-                      {item.label}
-                    </button>
-                  ))}
-                  
-                  <button
-                    onClick={handleLogout}
-                    disabled={isLoggingOut}
-                    className="flex items-center w-full px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
-                  >
-                    <LogOut className="w-4 h-4 mr-3" />
-                    {isLoggingOut ? 'Déconnexion...' : 'Se déconnecter'}
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start"
-                    onClick={() => {
-                      navigate('/login');
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Se connecter
-                  </Button>
-                  <Button
-                    variant="default"
-                    className="w-full"
-                    onClick={() => {
-                      navigate('/user-type');
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    S'inscrire
-                  </Button>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+        {/* Mobile Navigation Component */}
+        <MobileNavigation 
+          isOpen={isMenuOpen} 
+          onClose={() => setIsMenuOpen(false)} 
+        />
       </div>
     </header>
   );
