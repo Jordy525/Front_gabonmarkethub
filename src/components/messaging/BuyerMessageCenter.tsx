@@ -171,34 +171,28 @@ export const BuyerMessageCenter: React.FC = () => {
       
       {/* Contenu principal avec hauteur fixe */}
       <div className="flex-1 flex flex-col min-h-0">
-        {/* Header des actions - FIXE */}
-        <div className="flex-shrink-0 bg-white border-b border-gray-200 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <MessageCircle className="h-6 w-6 text-primary" />
+        {/* Header des actions - RESPONSIVE */}
+        <div className="flex-shrink-0 bg-white border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
               <div>
-                <h2 className="text-xl font-semibold">Messages - Acheteur</h2>
-                <p className="text-sm text-muted-foreground">
+                <h2 className="text-lg sm:text-xl font-semibold">Messages</h2>
+                <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block">
                   Contactez les fournisseurs et gérez vos conversations
                 </p>
               </div>
             </div>
             
-            <div className="flex items-center gap-3">
-              {/* <Button
-                variant="outline"
-                onClick={() => setShowFullSupplierList(true)}
-                className="flex items-center gap-2"
-              >
-                <Building2 className="h-4 w-4" />
-                Voir tous les fournisseurs
-              </Button> */}
+            <div className="flex items-center gap-2 sm:gap-3">
               <Button
                 onClick={() => setShowSupplierContactList(true)}
-                className="flex items-center gap-2"
+                className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
+                size="sm"
               >
-                <Plus className="h-4 w-4" />
-                Contacter un fournisseur
+                <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Contacter un fournisseur</span>
+                <span className="sm:hidden">Nouveau</span>
               </Button>
             </div>
           </div>
@@ -234,27 +228,28 @@ export const BuyerMessageCenter: React.FC = () => {
         {/* Contenu principal - masqué quand on affiche les listes */}
         {!showFullSupplierList && !showSupplierContactList && (
           <div className="flex-1 flex flex-col min-h-0">
-            {/* Filtres et recherche - FIXE */}
-            <div className="flex-shrink-0 bg-white border-b border-gray-100 px-6 py-4">
-              <div className="flex flex-col sm:flex-row gap-4">
+            {/* Filtres et recherche - RESPONSIVE */}
+            <div className="flex-shrink-0 bg-white border-b border-gray-100 px-3 sm:px-6 py-3 sm:py-4">
+              <div className="flex flex-col gap-3 sm:gap-4">
                 {/* Barre de recherche */}
-                <div className="relative flex-1">
+                <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input
                     type="text"
-                    placeholder="Rechercher dans les conversations..."
+                    placeholder="Rechercher..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2 text-sm border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                 </div>
 
                 {/* Filtres */}
-                <div className="flex gap-2">
+                <div className="flex gap-2 overflow-x-auto pb-1">
                   <Button
                     variant={filterStatus === 'all' ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setFilterStatus('all')}
+                    className="text-xs sm:text-sm whitespace-nowrap"
                   >
                     Toutes
                   </Button>
@@ -262,6 +257,7 @@ export const BuyerMessageCenter: React.FC = () => {
                     variant={filterStatus === 'unread' ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setFilterStatus('unread')}
+                    className="text-xs sm:text-sm whitespace-nowrap"
                   >
                     Non lues
                   </Button>
@@ -269,40 +265,41 @@ export const BuyerMessageCenter: React.FC = () => {
                     variant={filterStatus === 'recent' ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setFilterStatus('recent')}
+                    className="text-xs sm:text-sm whitespace-nowrap"
                   >
                     Récentes
                   </Button>
                 </div>
-              </div>
 
-              {/* Statistiques */}
-              <div className="flex items-center gap-4 text-sm text-muted-foreground mt-3">
-                <span>{filteredConversations.length} conversation(s)</span>
-                {conversations && (
-                  <>
-                    <span>•</span>
-                    <span>{conversations.filter(c => (c.messages_non_lus_acheteur || 0) > 0).length} avec messages non lus</span>
-                  </>
-                )}
+                {/* Statistiques */}
+                <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
+                  <span>{filteredConversations.length} conversation(s)</span>
+                  {conversations && (
+                    <>
+                      <span>•</span>
+                      <span className="truncate">{conversations.filter(c => (c.messages_non_lus_acheteur || 0) > 0).length} non lues</span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Contenu principal avec hauteur fixe */}
-            <div className="flex-1 flex min-h-0">
-              {/* Liste des conversations - DÉFILABLE */}
-              <div className="w-80 lg:w-96 border-r border-gray-200 bg-white flex flex-col">
-                <div className="flex-shrink-0 p-4 border-b">
-                  <h3 className="font-semibold flex items-center gap-2">
-                    <MessageCircle className="h-5 w-5" />
+            <div className="flex-1 flex flex-col lg:flex-row min-h-0">
+              {/* Liste des conversations - RESPONSIVE */}
+              <div className={`${selectedConversation ? 'hidden lg:flex' : 'flex'} w-full lg:w-80 xl:w-96 border-r border-gray-200 bg-white flex-col`}>
+                <div className="flex-shrink-0 p-3 sm:p-4 border-b">
+                  <h3 className="font-semibold flex items-center gap-2 text-sm sm:text-base">
+                    <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
                     Conversations
                   </h3>
                 </div>
                 
-                <div className="flex-1 overflow-y-auto p-4">
+                <div className="flex-1 overflow-y-auto p-3 sm:p-4">
                   {conversationsError ? (
                     <Alert variant="destructive">
                       <AlertCircle className="h-4 w-4" />
-                      <AlertDescription>
+                      <AlertDescription className="text-sm">
                         Erreur lors du chargement des conversations
                       </AlertDescription>
                     </Alert>
@@ -310,21 +307,21 @@ export const BuyerMessageCenter: React.FC = () => {
                     <div className="space-y-3">
                       {Array.from({ length: 5 }).map((_, index) => (
                         <div key={index} className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-full bg-muted animate-pulse" />
+                          <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-muted animate-pulse" />
                           <div className="flex-1 space-y-2">
-                            <div className="h-4 bg-muted rounded animate-pulse" />
-                            <div className="h-3 bg-muted rounded animate-pulse w-2/3" />
+                            <div className="h-3 sm:h-4 bg-muted rounded animate-pulse" />
+                            <div className="h-2 sm:h-3 bg-muted rounded animate-pulse w-2/3" />
                           </div>
                         </div>
                       ))}
                     </div>
                   ) : filteredConversations.length === 0 ? (
-                    <div className="text-center py-8 text-muted-foreground">
-                      <MessageCircle className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                      <p className="text-sm font-medium mb-2">
+                    <div className="text-center py-6 sm:py-8 text-muted-foreground">
+                      <MessageCircle className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-3 sm:mb-4 opacity-50" />
+                      <p className="text-xs sm:text-sm font-medium mb-2">
                         {searchTerm ? 'Aucune conversation trouvée' : 'Aucune conversation'}
                       </p>
-                      <p className="text-xs mb-4">
+                      <p className="text-xs mb-3 sm:mb-4 px-2">
                         {searchTerm 
                           ? 'Essayez avec d\'autres termes de recherche'
                           : 'Commencez par contacter un fournisseur'
@@ -334,8 +331,9 @@ export const BuyerMessageCenter: React.FC = () => {
                         <Button 
                           onClick={handleCreateConversation}
                           size="sm"
+                          className="text-xs sm:text-sm"
                         >
-                          <Plus className="h-4 w-4 mr-2" />
+                          <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                           Nouvelle conversation
                         </Button>
                       )}
@@ -351,26 +349,26 @@ export const BuyerMessageCenter: React.FC = () => {
                 </div>
               </div>
 
-              {/* Zone de chat - DÉFILABLE */}
-              <div className="flex-1 flex flex-col min-h-0">
+              {/* Zone de chat - RESPONSIVE */}
+              <div className={`${selectedConversation ? 'flex' : 'hidden lg:flex'} flex-1 flex-col min-h-0`}>
                 {selectedConversation ? (
                   <SimpleChat
                     conversation={selectedConversation}
                     onBack={() => setSelectedConversation(null)}
                   />
                 ) : (
-                  <div className="flex-1 flex items-center justify-center bg-gray-50">
-                    <div className="text-center">
-                      <MessageCircle className="h-16 w-16 mx-auto mb-4 text-muted-foreground opacity-50" />
-                      <h3 className="text-lg font-medium mb-2">
+                  <div className="flex-1 flex items-center justify-center bg-gray-50 p-4">
+                    <div className="text-center max-w-sm">
+                      <MessageCircle className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-3 sm:mb-4 text-muted-foreground opacity-50" />
+                      <h3 className="text-base sm:text-lg font-medium mb-2">
                         Sélectionnez une conversation
                       </h3>
-                      <p className="text-muted-foreground mb-6">
-                        Choisissez une conversation dans la liste à gauche pour commencer à échanger
+                      <p className="text-sm text-muted-foreground mb-4 sm:mb-6">
+                        Choisissez une conversation dans la liste pour commencer à échanger
                       </p>
                       <Button 
                         onClick={handleCreateConversation}
-                        className="flex items-center gap-2"
+                        className="flex items-center gap-2 text-sm"
                       >
                         <Plus className="h-4 w-4" />
                         Créer une conversation

@@ -353,29 +353,30 @@ export const SimpleChat: React.FC<SimpleChatProps> = ({
 
   return (
     <Card className={`h-full flex flex-col ${className}`} key={renderKey}>
-      {/* Header - FIXE, ne défile jamais */}
-      <CardHeader className="flex-shrink-0 border-b bg-white">
+      {/* Header - RESPONSIVE */}
+      <CardHeader className="flex-shrink-0 border-b bg-white p-3 sm:p-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
             {onBack && (
               <Button 
                 variant="ghost" 
                 size="sm" 
                 onClick={onBack}
                 disabled={!isMounted}
+                className="flex-shrink-0"
               >
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             )}
-            <div>
-              <h3 className="font-semibold">{otherPartyName}</h3>
-              <p className="text-sm text-gray-600">{conversation.sujet}</p>
+            <div className="min-w-0 flex-1">
+              <h3 className="font-semibold text-sm sm:text-base truncate">{otherPartyName}</h3>
+              <p className="text-xs sm:text-sm text-gray-600 truncate">{conversation.sujet}</p>
             </div>
           </div>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
             <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
-            <span className="text-xs text-gray-500">
+            <span className="text-xs text-gray-500 hidden sm:inline">
               {isConnected ? 'En ligne' : 'Hors ligne'}
             </span>
           </div>
@@ -400,7 +401,7 @@ export const SimpleChat: React.FC<SimpleChatProps> = ({
         ) : (
           <div 
             ref={messagesContainerRef}
-            className="flex-1 overflow-y-auto px-4 pb-4 min-h-0"
+            className="flex-1 overflow-y-auto px-3 sm:px-4 pb-3 sm:pb-4 min-h-0"
           >
             {safeMessages.length === 0 ? (
               <div className="text-center text-gray-500 py-8">
@@ -446,8 +447,8 @@ export const SimpleChat: React.FC<SimpleChatProps> = ({
         )}
       </div>
 
-      {/* Zone de saisie - FIXE, ne défile jamais */}
-      <div className="flex-shrink-0 border-t bg-white p-4">
+      {/* Zone de saisie - RESPONSIVE */}
+      <div className="flex-shrink-0 border-t bg-white p-3 sm:p-4">
         <form onSubmit={handleSendMessage} className="flex gap-2">
           <Input
             ref={inputRef}
@@ -456,17 +457,18 @@ export const SimpleChat: React.FC<SimpleChatProps> = ({
             onBlur={handleInputBlur}
             placeholder="Tapez votre message..."
             disabled={sending || !isConnected || !isMounted}
-            className="flex-1"
+            className="flex-1 text-sm sm:text-base"
           />
           <Button 
             type="submit" 
             disabled={!messageText.trim() || sending || !isConnected || !isMounted}
             size="sm"
+            className="flex-shrink-0"
           >
             {sending ? (
-              <RefreshCw className="h-4 w-4 animate-spin" />
+              <RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
             ) : (
-              <Send className="h-4 w-4" />
+              <Send className="h-3 w-3 sm:h-4 sm:w-4" />
             )}
           </Button>
         </form>
