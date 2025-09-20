@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
+import App from './App'
 import './index.css'
-import './styles/mobile-fixes.css'
-import './styles/mobile-buttons.css'
+import './styles/mobile-safe.css'
 
 createRoot(document.getElementById("root")!).render(<App />);

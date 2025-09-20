@@ -1,0 +1,60 @@
+/* CSS mobile sécurisé - ne bloque pas l'interface */
+
+/* Améliorer les boutons sur mobile uniquement */
+@media (max-width: 640px) {
+  /* Boutons de déconnexion plus visibles */
+  button[data-logout="true"],
+  .logout-button {
+    min-height: 44px !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.875rem !important;
+    background-color: transparent !important;
+    border: 1px solid #fca5a5 !important;
+    color: #dc2626 !important;
+  }
+
+  button[data-logout="true"]:hover,
+  .logout-button:hover {
+    background-color: #fef2f2 !important;
+  }
+
+  /* Améliorer les zones tactiles générales */
+  button {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  /* Améliorer les dropdowns sur mobile */
+  [role="menuitem"] {
+    min-height: 44px !important;
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* Navigation mobile plus accessible */
+  .mobile-nav button {
+    min-height: 44px !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* Corriger les problèmes de scroll */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Améliorer les modals sur mobile */
+  [role="dialog"] {
+    margin: 0.5rem !important;
+    max-height: 95vh !important;
+    width: calc(100vw - 1rem) !important;
+  }
+}
+
+/* Corrections pour très petits écrans */
+@media (max-width: 375px) {
+  button {
+    font-size: 0.75rem !important;
+    padding: 0.625rem 0.875rem !important;
+  }
+}
