@@ -14,6 +14,7 @@ import { useNotifications } from "@/hooks/api/useDashboard";
 import { CompanyInfoForm } from "@/components/supplier/CompanyInfoForm";
 import ProfilePhotoUpload from "@/components/profile/ProfilePhotoUpload";
 import { useProfilePhoto } from "@/hooks/useProfilePhoto";
+import { ProfileLogoutButton } from "@/components/ui/MobileLogoutButton";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import ResponsiveLayout from "@/components/layout/ResponsiveLayout";
@@ -281,19 +282,10 @@ const Profile = () => {
                 </nav>
 
                 <div className="mt-4 lg:mt-8 pt-4 lg:pt-6 border-t">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full text-red-600 hover:text-red-700 text-sm"
+                  <ProfileLogoutButton
                     onClick={handleLogout}
-                    disabled={logoutMutation.isPending}
-                  >
-                    <LogOut className="w-4 h-4 mr-2" />
-                    <span className="hidden sm:inline">
-                      {logoutMutation.isPending ? "Déconnexion..." : "Déconnexion"}
-                    </span>
-                    <span className="sm:hidden">Sortir</span>
-                  </Button>
+                    isLoading={logoutMutation.isPending}
+                  />
                 </div>
               </div>
             </div>

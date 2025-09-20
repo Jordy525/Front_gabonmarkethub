@@ -122,10 +122,12 @@ const SupplierHeader = () => {
                     <DropdownMenuItem
                       onClick={handleLogout}
                       disabled={isLoggingOut}
-                      className="text-red-600"
+                      className="text-red-600 hover:bg-red-50 min-h-[44px] touch-target"
                     >
-                      <LogOut className="w-4 h-4 mr-2" />
-                      {isLoggingOut ? 'Déconnexion...' : 'Se déconnecter'}
+                      <LogOut className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <span className="truncate">
+                        {isLoggingOut ? 'Déconnexion...' : 'Se déconnecter'}
+                      </span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -185,12 +187,14 @@ const SupplierHeader = () => {
                     </Button>
                     <Button
                       variant="ghost"
-                      className="justify-start text-red-600"
+                      className="justify-start text-red-600 hover:bg-red-50 min-h-[44px] touch-target w-full"
                       onClick={handleLogout}
                       disabled={isLoggingOut}
                     >
-                      <LogOut className="w-4 h-4 mr-2" />
-                      {isLoggingOut ? 'Déconnexion...' : 'Se déconnecter'}
+                      <LogOut className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <span className="truncate">
+                        {isLoggingOut ? 'Déconnexion...' : 'Se déconnecter'}
+                      </span>
                     </Button>
                   </>
                 ) : (

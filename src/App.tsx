@@ -54,7 +54,13 @@ import Search from "./pages/Search";
 
 
 import ErrorBoundary from "./components/ui/error-boundary";
+import { useMobileButtonFix } from "./hooks/useMobileButtonFix";
 
+// Composant pour appliquer les corrections mobiles
+const MobileFixProvider = ({ children }: { children: React.ReactNode }) => {
+  useMobileButtonFix();
+  return <>{children}</>;
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -72,12 +78,13 @@ const queryClient = new QueryClient({
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <AuthErrorHandler />
-      <Toaster />
-      <Sonner />
-      <ServerStatus />
-        <ErrorBoundary>
-          <BrowserRouter>
+      <MobileFixProvider>
+        <AuthErrorHandler />
+        <Toaster />
+        <Sonner />
+        <ServerStatus />
+          <ErrorBoundary>
+            <BrowserRouter>
             <OAuthHandler />
             <Routes>
             <Route path="/" element={<Index />} />
@@ -254,9 +261,9 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
                       </Routes>
-          </BrowserRouter>
-        </ErrorBoundary>
-
+            </BrowserRouter>
+          </ErrorBoundary>
+      </MobileFixProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
